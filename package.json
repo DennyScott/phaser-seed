@@ -1,0 +1,15 @@
+{
+  "name": "PhaserGame",
+  "version": "0.0.1",
+  "description": "example phaser game using Zephyr",
+  "main": "index.html",
+  "scripts": {
+    "test": "karma start"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.8.9",
+    "gulp-connect": "^2.0.6"
+  }
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset = "utf-8" />
+	<title>First Game</title>
+	<style type="text/css">
+		@import url(http://fonts.googleapis.com/css?family=Geo);
+
+		.hiddenText { font-family: Geo; visibility: hidden;}
+	</style>
+
+
+	<script type = "text/javascript" src="lib/phaser.js"></script>
+	<script type = "text/javascript" src="js/boot.js"></script>
+	<script type = "text/javascript" src="js/load.js"></script>
+	<script type = "text/javascript" src="js/menu.js"></script>
+	<script type = "text/javascript" src="js/play.js"></script>
+	<script type = "text/javascript" src="js/game.js"></script>
+</head>
+<body>
+<p class="hiddenText"> . </p>
+	<div id ="gameDiv"></div>
+</body>
+<script type="text/javascript">
+
+	if(myrenderer instanceof PIXI.CanvasRenderer) {
+    alert('canvas');
+} else {
+    alert('webgl');
+}
+</script>
+</html>
