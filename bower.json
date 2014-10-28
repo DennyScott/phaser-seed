@@ -1,0 +1,12 @@
+{
+  "name": "Phaser Seed",
+  "description": "A simple seed project",
+  "version": "0.0.1",
+  "homepage": "https://github.com/DennyScott/phaser-seed",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {},
+  "devDependencies": {
+    "phaser": "~2.1.3"
+  }
+}

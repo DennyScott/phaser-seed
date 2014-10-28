@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var connect = require('gulp-connect');
+var karma = require('karma').server;
 
 var path = {
 	src: './app/**/*',
@@ -15,6 +16,13 @@ gulp.task('build', function() {
 gulp.task('reload', function() {
 	gulp.src('./www')
 		.pipe(connect.reload());
+});
+
+gulp.task('test', function() {
+	karma.start({
+		configFile: __dirname + '/karma.conf.js',
+		singleRun: true
+	});
 });
 
 gulp.task('connect', function() {
