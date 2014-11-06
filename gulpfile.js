@@ -7,7 +7,7 @@ var traceurOptions = require('./config').traceur;
 var sourcemaps = require('gulp-sourcemaps');
 
 var path = {
-	src: ['./app/**/*', '!./app/**/*.js'],
+	src: ['./app/**/*', '!./app/js/**/*.js'],
 	dest: 'www/',
 	es6Src: './app/js/**/*.js',
 	es6Dest: 'www/js/',
