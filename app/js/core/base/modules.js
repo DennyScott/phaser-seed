@@ -1,0 +1,4 @@
+export {
+	BaseObject
+}
+from './baseObject';
