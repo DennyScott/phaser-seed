@@ -11,7 +11,7 @@ var path = {
 	dest: 'www/',
 	es6Src: './app/js/**/*.js',
 	es6Dest: 'www/js/',
-	scripts: ['app/js/**/*.js']
+	scripts: 'app/js/**/*.js'	
 };
 
 gulp.task('build', function() {
@@ -51,7 +51,6 @@ gulp.task('connect', function() {
 	connect.server({
 		root: 'www',
 		port:3000,
-		open:true,
 		livereload: true
 	});
 });

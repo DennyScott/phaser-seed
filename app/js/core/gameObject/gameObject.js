@@ -1,11 +1,11 @@
 import {
 	BaseObject
 }
-from '../base/modules';
+from '../modules';
 import {
 	Component
 }
-from '../component/modules';
+from '../modules';
 
 
 /**
