@@ -3,17 +3,9 @@ var connect = require('gulp-connect');
 var karma = require('karma').server;
 
 var path = {
-<<<<<<< HEAD
-	src: ['./app/**/*', '!./app/js/**/*.js'],
-	dest: 'www/',
-	es6Src: './app/js/**/*.js',
-	es6Dest: 'www/js/',
-	scripts: 'app/js/**/*.js'	
-=======
 	src: './app/**/*',
 	dest: 'www/',
 	scripts: ['app/js/**/*.js', 'app/main.js']
->>>>>>> parent of f4346e9... Added Zephyr Core and Ecma 6
 };
 
 gulp.task('build', function() {
