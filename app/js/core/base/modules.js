@@ -1,4 +1,0 @@
-export {
-	BaseObject
-}
-from './baseObject';
