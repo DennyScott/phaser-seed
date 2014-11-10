@@ -1,6 +1,6 @@
 (function() {
 	var Zephyr = window.Zephyr || {};
-	var game = window.game || {};
+	var _ = window._ || {}:
 
 	/**
 	 * Any object found within the scnee is generally going to be a GameObject.  This object stores all attributes needed for the object,
