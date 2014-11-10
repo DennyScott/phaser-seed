@@ -66,6 +66,16 @@
 			_this.nextButton.input.useHandCursor = true; //if you want a hand cursor
 		};
 
+		/**
+		 * Starts the next state
+		 * @return {void} No return value
+		 */
+		this.start = function() {
+			//Start the actual game
+			// game.state.start('play');
+			console.log('Start Game!!!');
+		};
+
 
 	};
 
