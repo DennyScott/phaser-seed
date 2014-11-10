@@ -1,7 +1,7 @@
 (function() {
 	var Zephyr = window.Zephyr || {};
 	var game = window.game || {};
-	
+
 	/**
 	 * Any object found within the scnee is generally going to be a GameObject.  This object stores all attributes needed for the object,
 	 * any componenet created by the developer and attached will be stroed here and have all of its function intialised and run, and will store
@@ -41,10 +41,10 @@
 		_constructor(game, name, imageKey, frame);
 
 		this.preload = function() {
-			for (var key in _this.components) {
+			_.forEach(_this.components, function(component) {
 				//Cycles through each component and preloads it
-				_this.components[key].preload();
-			}
+				component.preload();
+			});
 		};
 
 		/**
@@ -54,9 +54,9 @@
 		 */
 		this.create = function() {
 			if (_this.isActive) {
-				for (var key in _this.components) {
-					_this.components[key].create();
-				}
+				_.forEach(_this.components, function(component) {
+					component.create();
+				});
 			}
 		};
 
@@ -67,12 +67,12 @@
 		 */
 		this.update = function() {
 			if (_this.isActive) {
-				for (var key in _this.components) {
-					var value = _this.components[key];
-					if (typeof value.isEnabled === 'undefined' || value.isEnabled() === true) {
-						value.update();
+				_.forEach(_this.components, function(component) {
+					if (_.isUndefined(component.isEnabled) || component.isEnabled() === true) {
+						component.update();
 					}
-				}
+
+				});
 			}
 		};
 
@@ -119,13 +119,14 @@
 		 * @param {string} methodName The method name to call for this object and its components
 		 */
 		this.broadcastMessage = function(methodName) {
-			for (var key in _this.components) {
+			_.forEach(_this.components, function(component) {
 				//Cycles through all keys in the components object
-				if (typeof _this.components[key][methodName] === 'function') {
+				if (_.isFunction(component[methodName])) {
 					//If there is a method of the passed name. it will be called
-					_this.components[key][methodName]();
+					component[methodName]();
 				}
-			}
+
+			});
 		};
 
 		/**

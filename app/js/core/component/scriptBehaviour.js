@@ -68,12 +68,8 @@
 		 * @return i The number of pending invokes in the JSON object
 		 */
 		this.getPendingTimeouts = function() {
-			var i = 0;
-			for (var key in _this.allTimeouts) {
-				i++;
-			}
+			return _.size(_this.allTimeouts)
 
-			return i;
 		};
 
 		/*
@@ -84,12 +80,7 @@
 		 *
 		 */
 		this.getPendingIntervals = function() {
-			var i = 0;
-			for (var key in _this._allIntervals) {
-				i++;
-			}
-
-			return i;
+			return _.size(_this._allIntervals);
 		};
 
 

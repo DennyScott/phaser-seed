@@ -5,6 +5,7 @@ var game = new Phaser.Game(1000, 680, Phaser.AUTO, 'gameDiv');
 //Define our 'global variable'
 game.global = {};
 
+
 //Add all the states
 game.state.add('boot', new window.states.boot());
 game.state.add('load', new window.states.load());

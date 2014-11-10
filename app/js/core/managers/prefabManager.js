@@ -1,5 +1,5 @@
 (function() {
-	var game = window.game || {};
+	// var game = window.game || {};
 	var Zephyr = window.Zephyr || {};
 
 	/**
