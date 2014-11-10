@@ -1,4 +1,9 @@
 (function() {
+	var Zephyr;
+	var Phaser;
+	var game;
+
+
 	var Menu = function() {
 		var _this = this;
 
@@ -14,17 +19,20 @@
 
 		this.preload = function() {
 			_preload();
+			Zephyr = window.Zephyr || {};
+			Phaser = window.Phaser || {};
+			game = window.game || {};
 		};
 
 		this.create = function() {
 			_create();
 			_this.createButton();
 			_this.createNameLabel();
-		}
+		};
 
 		this.update = function() {
 			_update();
-		}
+		};
 
 		this.createNameLabel = function() {
 			//Display the name of the game

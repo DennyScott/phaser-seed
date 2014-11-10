@@ -1,4 +1,8 @@
 (function() {
+	var Zephyr;
+	var Phaser;
+	var game;
+
 	var Load = function() {
 		var _this = this;
 
@@ -14,6 +18,11 @@
 
 		this.preload = function() {
 			_preload();
+			Zephyr = window.Zephyr || {};
+			Phaser = window.Phaser || {};
+			game = window.game || {};
+
+
 			_this.createLoadScreen(); //Creates the load screen to watch.  This must be first
 
 			//Loads all needed Assets
@@ -26,11 +35,11 @@
 		this.create = function() {
 			_create();
 			_this.loadNextState();
-		}
+		};
 
 		this.update = function() {
 			_update();
-		}
+		};
 
 		this.createLoadScreen = function() {
 			//Add a loading... label on the screen
@@ -44,10 +53,10 @@
 			var progressBar = game.add.sprite(game.world.centerX, 200, 'progressBar');
 			progressBar.anchor.setTo(0.5, 0.5);
 			game.load.setPreloadSprite(progressBar);
-		}
+		};
 
 
-		this.loadAudioAssets = function() {}
+		this.loadAudioAssets = function() {};
 
 
 
@@ -55,21 +64,22 @@
 			//Load a new asset that we will use in the menu state
 			game.load.image('player', 'assets/RedSquare.png');
 			game.load.image('nextButton', 'assets/BlackLabel.png');
-		}
+		};
 
 
 
 		this.loadNextState = function() {
 			game.state.start('menu');
-		}
+		};
 
 
 
-		this.loadSpritesheetAssets = function() {}
+		this.loadSpritesheetAssets = function() {};
 
 
 
-		this.loadTilesetAssets = function() {}
+		this.loadTilesetAssets = function() {};
+
 	};
 
 	Load.prototype = Object.create(window.Zephyr.states.__state__.prototype);

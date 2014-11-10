@@ -1,5 +1,5 @@
 (function() {
-	
+	var game = window.game || {};
 	var Zephyr = window.Zephyr || {};
 
 	/**
@@ -34,7 +34,7 @@
 		 * @param {GameObject} object The gameObject to store within the gameObjects dictionary
 		 * @return {string} The new key for this object.
 		 */
-		this.add = function(key, obect) {
+		this.add = function(key, object) {
 			if (typeof _this.gameObjects[key] !== 'undefined') {
 				//If an object with the given key already exists within the gameObjects dictionary
 
@@ -52,7 +52,7 @@
 
 			_this.gameObjects[key] = object; //Set te given key to the passed GameObject
 			return key; //Return the new key. If the key didn't exist, this is still your old key
-		}
+		};
 		/**
 		 * Returns the amount of gameObjects currently stored within the gameObjects dictionary
 		 *

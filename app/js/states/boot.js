@@ -1,4 +1,8 @@
 (function() {
+	var Zephyr;
+	var Phaser;
+	var game;
+
 	var Boot = function() {
 		var _this = this;
 
@@ -14,6 +18,9 @@
 
 		this.preload = function() {
 			_preload();
+			Zephyr = window.Zephyr || {};
+			Phaser = window.Phaser || {};
+			game = window.game || {};
 
 			//Load the image
 			game.load.image('progressBar', 'assets/progressBar.png');
@@ -58,7 +65,7 @@
 			game.state.start('load');
 		};
 
-		
+
 	};
 
 	Boot.prototype = Object.create(window.Zephyr.states.__state__.prototype);

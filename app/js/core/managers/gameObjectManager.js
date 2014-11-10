@@ -1,6 +1,7 @@
 (function() {
 	var Zephyr = window.Zephyr || {};
 	var GameObject = Zephyr.gameObject;
+	var game = window.game || {};
 	
 	/**
 	 * GameObjectManager will contain all objects that are being used

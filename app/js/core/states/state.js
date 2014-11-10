@@ -2,8 +2,6 @@
 	var Zephyr = window.Zephyr || {};
 
 	var State = function() {
-		var _this = this;
-
 		var _constructor = function() {
 
 		};

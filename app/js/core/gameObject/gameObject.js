@@ -1,6 +1,7 @@
 (function() {
 	var Zephyr = window.Zephyr || {};
-
+	var game = window.game || {};
+	
 	/**
 	 * Any object found within the scnee is generally going to be a GameObject.  This object stores all attributes needed for the object,
 	 * any componenet created by the developer and attached will be stroed here and have all of its function intialised and run, and will store
@@ -155,8 +156,7 @@
 				}
 			}
 		};
-
-	}
+	};
 
 
 	GameObject.prototype = Object.create(Zephyr.base.__baseObject__.prototype);

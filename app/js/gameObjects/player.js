@@ -1,7 +1,7 @@
 (function() {
 
 	var game = window.game || {};
-	var Phaser = window.Phaser || {};
+	var Zephyr = window.Zephyr || {};
 	/**
 	 * Player Class
 	 */
@@ -24,7 +24,7 @@
 		};
 
 		this.create = function(x, y) {
-			this.sprite = game.add.sprite(x, y, texture);
+			this.sprite = game.add.sprite(x, y, _this.texture);
 			this.sprite.scale.x = 0.2;
 			this.sprite.scale.y = 0.2;
 		};

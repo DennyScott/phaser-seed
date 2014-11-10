@@ -1,5 +1,6 @@
 (function() {
 	var Zephyr = window.Zephyr || {};
+	var game = window.game || {};
 	/**
 	 * Used to store existing tags in, and keep track of data that needs to be associated with the tags.  This is not
 	 * the place in which items are associated with tags, that is done within the GameObject class.  Instead this
@@ -62,7 +63,7 @@
 				i++;
 			}
 			return i; //Returns the amount of keys found
-		}
+		};
 
 		_constructor(game);
 	};
