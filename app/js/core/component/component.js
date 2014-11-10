@@ -1,6 +1,7 @@
 (function() {
-	 var Zephyr = window.Zephyr || {};
-
+	var Zephyr = window.Zephyr || {};
+	var game = window.game || {};
+	
 	/**
 	 * The Component class is used for items that will be attached to a Game Object.  These include things like scripts.
 	 *

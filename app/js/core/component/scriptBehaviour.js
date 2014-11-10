@@ -1,6 +1,7 @@
 (function() {
 	var Zephyr = window.Zephyr || {};
-
+	var game = window.game || {};
+	
 	/**
 	 * ScriptBehaviour is the base class that every script derives from. ScriptBehaviour adds imporant functions and variables
 	 * useful for behaviours while scripting.
@@ -19,7 +20,7 @@
 		};
 
 		_constructor(game);
-		var _enabled = this.setEnabled
+		var _enabled = this.setEnabled;
 
 		/**
 		 * Set the Enabled to the boolean passed through. If true, trigger the onEnable function, if false
@@ -44,7 +45,7 @@
 		this.invoke = function(methodName, seconds) {
 
 			//Check if method exists before invoke
-			if (typeof _this[method] === 'function') {
+			if (typeof _this[methodName] === 'function') {
 
 				//Set a timeout for the method, and store the id
 				var timeoutId = setTimeout(function() {
@@ -156,7 +157,7 @@
 			}
 
 			return false;
-		}
+		};
 
 
 

@@ -1,5 +1,6 @@
 (function() {
 	var Zephyr = window.Zephyr || {};
+	var GameObject = Zephyr.gameObject;
 	
 	/**
 	 * GameObjectManager will contain all objects that are being used
@@ -11,8 +12,8 @@
 	var GameObjectManager = function(game) {
 
 		var _game; //The game that exists within
+		var _this = this;
 		this.gameObjects = {}; //This will contain all of the gameobjects, stored unique with a key
-		_this = this;
 
 		var _constructor = function(game) {
 			_game = game;
@@ -33,16 +34,16 @@
 					//If an object with the given key already exists within the gameObjects dictionary
 
 					var passed = _this.gameObjects[key]; //Used to check if the key already exists
-					var i = 0;; //Used to concat onto the string to try and find a unique id
+					var i = 0; //Used to concat onto the string to try and find a unique id
 
 					while (typeof passed !== 'undefined') {
 						//Iterate through ints until a string is created that is not a key in the gameObject dictionary
 						i++;
 
 						//Set Passed to the new value to test if this string exists already in the gameObjects dictionary
-						passed = _this.gameObjects[key + '' + i]
+						passed = _this.gameObjects[key + '' + i];
 					}
-					key = key + '' + i
+					key = key + '' + i;
 				}
 
 				_this.gameObjects[key] = object; //Set the given key to the passed Gameobject
@@ -96,7 +97,7 @@
 		this.findGameObjectByTag = function(tag) {
 			for (var key in _this.gameObjects) {
 				//Cycles through each key inside the gameObjects dictionary
-				if (_this.gameObjects[key].tag) {
+				if (_this.gameObjects[key].tag === tag) {
 					//If the tag of this object is the tag passed, return the first item found
 					return _this.gameObjects[key];
 				}
@@ -121,7 +122,7 @@
 			}
 
 			return objects;
-		}
+		};
 
 		_constructor(game);
 	};
