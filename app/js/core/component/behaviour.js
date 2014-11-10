@@ -1,5 +1,6 @@
 (function() {
 	var Zephyr = window.Zephyr || {};
+	var game = window.game || {};
 	/**
 	 * The Behaviour class are Components that can be enabled or disabled.
 	 *
@@ -22,7 +23,7 @@
 		 * @return boolean Is the object enabled
 		 */
 		this.isEnabled = function() {
-			return _this._enabled;
+			return _enabled;
 		};
 
 		/**
@@ -31,8 +32,8 @@
 		 * @param en The value to set the enabled or disabled object o.
 		 */
 		this.setEnabled = function(en) {
-			_this._enabled = en;
-		}
+			_enabled = en;
+		};
 
 		_constructor(game);
 	};
