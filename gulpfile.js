@@ -1,40 +1,17 @@
-var gulp = require('gulp');
-var connect = require('gulp-connect');
-var karma = require('karma').server;
+/*
+  gulpfile.js
+  ===========
+  Rather than manage one giant configuration file responsible
+  for creating multiple tasks, each task has been broken out into
+  its own file in gulp/tasks. Any files in that directory get
+  automatically required below.
 
-var path = {
-	src: './app/**/*',
-	dest: 'www/',
-	scripts: ['app/js/**/*.js', 'app/main.js']
-};
+  To add a new task, simply add a new task file that directory.
+  gulp/tasks/default.js specifies the default set of tasks to run
+  when you run `gulp`.
+*/
 
-gulp.task('build', function() {
-	gulp.src(path.src)
-		.pipe(gulp.dest(path.dest));
-});
+var requireDir = require('require-dir');
 
-gulp.task('reload', function() {
-	gulp.src('./www')
-		.pipe(connect.reload());
-});
-
-gulp.task('test', function() {
-	karma.start({
-		configFile: __dirname + '/karma.conf.js',
-		singleRun: true
-	});
-});
-
-gulp.task('connect', function() {
-	connect.server({
-		root: 'www',
-		port:3000,
-		livereload: true
-	});
-});
-
-gulp.task('watch', function() {
-	gulp.watch(path.scripts, ['build', 'reload']);
-});
-
-gulp.task('default', ['watch', 'build', 'connect']);
+// Require all tasks in gulp/tasks, including subfolders
+requireDir('./gulp/tasks', { recurse: true });
