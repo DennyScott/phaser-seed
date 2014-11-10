@@ -35,13 +35,13 @@
 		 * @return {string} The new key for this object.
 		 */
 		this.add = function(key, object) {
-			if (typeof _this.gameObjects[key] !== 'undefined') {
+			if (!_.isUndefined(_this.gameObjects[key]) {
 				//If an object with the given key already exists within the gameObjects dictionary
 
 				var passed = _this.gameObjects[key]; //Used to check if the key already exists
 				var i = 0; //Used to concat onto the string to try and find a unique id
 
-				while (typeof passed !== 'undefined') {
+				while (_.isUndefined(passed)) {
 					//Iterate through ints until a string is created that is not a key in the gameobject dictionary
 					i++;
 					//Set passed to the new value to test if this string exists already in the gameObjects dictionary
@@ -60,11 +60,7 @@
 		 * @return {int} The amount of objects stored within the gameObjects dictionary
 		 */
 		this.count = function() {
-			var i = 0;
-			for (var objs in _this.gameObjects) {
-				i++;
-			}
-			return i;
+			return _.size(_this.gameObjects);
 		};
 
 		/**

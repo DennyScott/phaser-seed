@@ -2,6 +2,7 @@
 	var Zephyr = window.Zephyr || {};
 	var GameObject = Zephyr.gameObject;
 	var game = window.game || {};
+	var _ = window._ || {};
 	
 	/**
 	 * GameObjectManager will contain all objects that are being used
@@ -62,13 +63,7 @@
 		 * @return {int} The amount of objects stored within the gameObjects dictionary
 		 */
 		this.count = function() {
-			var i = 0;
-			for (var objs in _this.gameObjects) {
-				//this is a javascript trick to actually iterate through keys in a dictionary
-				i++;
-			}
-
-			return i;
+			return _.size(_this.gameObjects);
 		};
 
 		/**
@@ -96,13 +91,11 @@
 		 * @return {GameObject} The first GameObject found that has the given tag
 		 */
 		this.findGameObjectByTag = function(tag) {
-			for (var key in _this.gameObjects) {
-				//Cycles through each key inside the gameObjects dictionary
-				if (_this.gameObjects[key].tag === tag) {
-					//If the tag of this object is the tag passed, return the first item found
-					return _this.gameObjects[key];
+			_.forEach(_this.gameObjects, function (value, key) {
+				if (!_.isUndefined(value.tag) && value.tag === tag) {
+					return value;
 				}
-			}
+			});
 		};
 
 		/**
@@ -114,14 +107,11 @@
 		 */
 		this.findAllGameObjectsByTag = function(tag) {
 			var objects = []; //This will have objects added to it, and then returned to the user at the end
-			for (var key in _this.gameObjects) {
-				//Cycles through each key inside the gameObjects dictionary
-				if (_this.gameObjects[key].tag === tag) {
-					//If the tag of this object is equal to the tag passed, add it to the objects array
-					objects.push(_this.gameObjects[key]);
+			_.forEach(_this.gameObjects, function (value, key) {
+				if (!_.isUndefined(value.tag) && value.tag === tag) {
+					objects.push(value);
 				}
-			}
-
+			});
 			return objects;
 		};
 

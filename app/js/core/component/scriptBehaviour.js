@@ -1,7 +1,8 @@
 (function() {
 	var Zephyr = window.Zephyr || {};
 	var game = window.game || {};
-	
+	var _ = window._ || {};
+
 	/**
 	 * ScriptBehaviour is the base class that every script derives from. ScriptBehaviour adds imporant functions and variables
 	 * useful for behaviours while scripting.
@@ -30,7 +31,6 @@
 		 */
 		this.setEnabled = function(en) {
 			_enabled(en);
-
 			if (this._enabled === true) {
 				this.onEnable();
 			}
@@ -45,12 +45,12 @@
 		this.invoke = function(methodName, seconds) {
 
 			//Check if method exists before invoke
-			if (typeof _this[methodName] === 'function') {
+			if (_.isFunction(_this[methodName])) {
 
 				//Set a timeout for the method, and store the id
 				var timeoutId = setTimeout(function() {
 					_this[methodName]();
-					if (typeof _this._allTimeouts[timeoutId] !== 'undefined') {
+					if (!_.isUndefined(_this._allTimeouts[timeoutId])) {
 						//remove the id of the timeout from the JSON object
 						delete _this._allTimeouts[timeoutId];
 					}
@@ -68,7 +68,7 @@
 		 * @return i The number of pending invokes in the JSON object
 		 */
 		this.getPendingTimeouts = function() {
-			return _.size(_this.allTimeouts)
+			return _.size(_this.allTimeouts);
 
 		};
 
@@ -93,7 +93,7 @@
 		 */
 		this.invokeRepeating = function(methodName, seconds) {
 			//Check if method exists in ScriptBehaviour
-			if (typeof _this[methodName] === 'function') {
+			if (_.isFunction(_this[methodName])) {
 
 				//Set interval for Method
 				var intervalId = setInterval(function() {
@@ -111,18 +111,17 @@
 		 *
 		 */
 		this.cancelInvokes = function() {
-
 			//Cancel all Timeouts (Invokes)
-			for (var key in _this._allTimeouts) {
+			_.forEach(_this._allTimeouts, function(component, key) {
 				clearTimeout(key);
 				delete _this._allTimeouts[key];
-			}
+			});
 
 			//Cancel all Intervals(Invoke Repeating)
-			for (var iKey in _this._allIntervals) {
-				clearInterval(iKey);
-				delete _this._allIntervals[iKey];
-			}
+			_.forEach(_this._allIntervals, function(component, key) {
+				clearTimeout(key);
+				delete _this._allIntervals[key];
+			});
 		};
 
 		/**
@@ -134,18 +133,17 @@
 		this.isInvoking = function(methodName) {
 
 			//Check all timeouts
-			for (var key in _this._allTimeouts) {
-				if (_this._allTimeouts[key] === methodName) {
+			_.forEach(_this._allTimeouts, function(component) {
+				if (component === methodName) {
 					return true;
 				}
-			}
+			});
 
-			//Check all Intervals
-			for (var iKey in _this._allIntervals) {
-				if (this._allIntervals[iKey] === methodName) {
+			_.forEach(_this._allIntervals, function(component) {
+				if (component === methodName) {
 					return true;
 				}
-			}
+			});
 
 			return false;
 		};
