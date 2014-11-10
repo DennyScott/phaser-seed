@@ -48,7 +48,7 @@
 				key = key + '' + i; //Make key this new string
 			}
 
-			this.gameObjects[key] = object; //Set te given key to the passed GameObject
+			_this.gameObjects[key] = object; //Set te given key to the passed GameObject
 			return key; //Return the new key. If the key didn't exist, this is still your old key
 		}
 		/**

@@ -91,7 +91,7 @@
 		 * @param {string} tag The tag to find the first GameObject of
 		 * @return {GameObject} The first GameObject found that has the given tag
 		 */
-		this.findGameObjectByTag(tag) {
+		this.findGameObjectByTag = function(tag) {
 			for (var key in _this.gameObjects) {
 				//Cycles through each key inside the gameObjects dictionary
 				if (_this.gameObjects[key].tag) {
@@ -108,7 +108,7 @@
 		 * @param {string} tag The tag to find all objects with that contain the string as a tag
 		 * @return {Array} containing all objects that contain the passed tag value as a tag
 		 */
-		this.findAllGameObjectsByTag(tag) {
+		this.findAllGameObjectsByTag = function(tag) {
 			var objects = []; //This will have objects added to it, and then returned to the user at the end
 			for (var key in _this.gameObjects) {
 				//Cycles through each key inside the gameObjects dictionary
