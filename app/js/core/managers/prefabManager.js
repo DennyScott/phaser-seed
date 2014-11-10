@@ -77,6 +77,8 @@
 			delete _this.gameObjects[key]; //Removes reference from prefabManager
 			return point;
 		};
+
+		_constructor(game);
 	};
 
 	Zephyr = Zephyr || {};
