@@ -59,7 +59,7 @@
 		 */
 		this.count = function() {
 			var i = 0;
-			for (vars objs in _this.gameObjects) {
+			for (var objs in _this.gameObjects) {
 				i++;
 			}
 			return i;
@@ -81,7 +81,7 @@
 		_constructor(game);
 	};
 
-	Zephyr = Zephyr || {};
+	var Zephyr = Zephyr || {};
 	Zephyr.managers = Zephyr.managers || {};
-	Zephyr.managers.prefabManager = prefabManager;
+	Zephyr.managers.prefabManager = PrefabManager;
 })();
