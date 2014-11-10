@@ -1,4 +1,5 @@
 (function() {
+	var Zephyr = window.Zephyr || {};
 
 	/**
 	 * ScriptBehaviour is the base class that every script derives from. ScriptBehaviour adds imporant functions and variables
@@ -163,7 +164,6 @@
 
 	ScriptBehaviour.prototype = Object.call(Zephyr.component.behaviour.prototype);
 
-	Zephyr = Zephyr || {};
 	Zephyr.component = Zephyr.component || {};
 	Zephyr.component.scriptBehaviour = ScriptBehaviour;
 

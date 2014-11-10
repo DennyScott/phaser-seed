@@ -1,4 +1,6 @@
 (function() {
+	 window.Zephyr = window.Zephyr || {};
+	 var Zephyr = window.Zephyr;
 
 	/**
 	 * The BaseObject class is the inherited class most other scripts that involve in game activity will inherit from.  It contains the required preload, create, update
@@ -6,7 +8,7 @@
 	 *
 	 * @class  BaseObject
 	 */
-	var BaseObject = new function() {
+	var BaseObject = function(game) {
 		this.game;
 
 		/**
@@ -57,8 +59,6 @@
 
 		_constructor(game);
 	};
-
-	Zephyr = Zephyr || {};
 	Zephyr.base = Zephyr.base || {};
 	Zephyr.base.__baseObject__ = BaseObject;
 

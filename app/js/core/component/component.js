@@ -1,4 +1,5 @@
 (function() {
+	 var Zephyr = window.Zephyr || {};
 
 	/**
 	 * The Component class is used for items that will be attached to a Game Object.  These include things like scripts.
@@ -49,7 +50,6 @@
 	//Inherit Base Object
 	Component.prototype = Object.create(Zephyr.base.__baseObject__.prototype);
 
-	Zephyr = Zephyr || {};
 	Zephyr.component = Zephyr.component || {};
 	Zephyr.component.__component__ = Component;
 })();

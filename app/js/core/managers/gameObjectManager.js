@@ -1,4 +1,6 @@
 (function() {
+	var Zephyr = window.Zephyr || {};
+	
 	/**
 	 * GameObjectManager will contain all objects that are being used
 	 * in the current state.  It can be used to store objects and then
@@ -124,7 +126,6 @@
 		_constructor(game);
 	};
 
-	Zephyr = Zephyr || {};
 	Zephyr.managers = Zephyr.managers || {};
 	Zephyr.managers.gameObjectManager = GameObjectManager;
 })();

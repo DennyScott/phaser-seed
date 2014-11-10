@@ -1,4 +1,5 @@
 (function() {
+	var Zephyr = window.Zephyr || {};
 	/**
 	 * Used to store existing tags in, and keep track of data that needs to be associated with the tags.  This is not
 	 * the place in which items are associated with tags, that is done within the GameObject class.  Instead this
@@ -66,7 +67,6 @@
 		_constructor(game);
 	};
 
-	Zephyr = Zephyr || {};
 	Zephyr.managers = Zephyr.managers || {};
 	Zephyr.managers.tagManager = TagManager;
 })();

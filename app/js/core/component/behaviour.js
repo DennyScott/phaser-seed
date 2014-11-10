@@ -1,5 +1,5 @@
 (function() {
-
+	var Zephyr = window.Zephyr || {};
 	/**
 	 * The Behaviour class are Components that can be enabled or disabled.
 	 *
@@ -39,7 +39,6 @@
 
 	Behaviour.prototype = Zephyr.component.__component__.prototype;
 
-	Zephyr = Zephyr || {};
 	Zephyr.component = Zephyr.component || {};
 	Zephyr.component.behaviour = Behaviour;
 
