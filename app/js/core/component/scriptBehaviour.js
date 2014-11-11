@@ -7,7 +7,7 @@ var _ = window._ || {};
  *
  */
 class ScriptBehaviour extends Behaviour {
-	
+
 	constructor(game, gameObject) {
 		super(game);
 		this._allTimeouts = {}; //Store all single invokes
