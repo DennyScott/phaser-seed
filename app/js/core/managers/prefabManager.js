@@ -2,7 +2,7 @@
 	// var game = window.game || {};
 	var Zephyr = window.Zephyr || {};
 	var _ = window._ || {};
-	
+
 	/**
 	 * Used to hold all existing prefabs contained within a scene.  Items added to this manager
 	 * do not exist in the scene, but instead exist to create clones of to put in the game world
@@ -14,7 +14,6 @@
 	var PrefabManager = function(game) {
 
 		var _this = this;
-		this.game = undefined;
 		this.gameObjects = {};
 
 		/**
@@ -24,7 +23,39 @@
 		 * @param {Phaser.Game} game The game object in which this prefabManager will exist
 		 */
 		var _constructor = function(game) {
-			_this.game = game;
+			Zephyr.managers.baseManager.call(_this, game);
+		};
+
+		_constructor(game);
+
+		var _preload = _this.preload;
+		var _create = _this.create;
+		var _update = _this.update;
+		var _destroy = _this.destroy;
+
+		/**
+		 * This method can be extended, and will load before the state starts
+		 */
+		this.preload = function() {
+			_preload();
+		};
+
+		/**
+		 * This method can be extended, and will be called when the object is created
+		 */
+		this.create = function() {
+			_create();
+		};
+
+		/**
+		 * This method can be extended, and will be called every frame after the create method is called.  Be causious to not put to much into this method.
+		 */
+		this.update = function() {
+			_update();
+		};
+
+		this.destory = function() {
+			destroy();
 		};
 
 		/**
@@ -76,9 +107,8 @@
 			delete _this.gameObjects[key]; //Removes reference from prefabManager
 			return point;
 		};
-
-		_constructor(game);
 	};
+	PrefabManager.prototype = Object.call(Zephyr.managers.baseManager.prototype);
 
 	Zephyr.managers = Zephyr.managers || {};
 	Zephyr.managers.prefabManager = PrefabManager;

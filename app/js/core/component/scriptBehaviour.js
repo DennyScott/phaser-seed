@@ -14,13 +14,44 @@
 		this._allIntervals = {}; //Store all invokeRepeatings
 		this.onEnable = function() {}; //onEnable trigger function
 		this.onDisable = function() {}; //onDisable trigger function
+		var _enabled = this.setEnabled;
 
 		var _constructor = function(game) {
 			Zephyr.component.behaviour.call(_this, game);
 		};
 
 		_constructor(game);
-		var _enabled = this.setEnabled;
+
+
+		var _preload = _this.preload;
+		var _create = _this.create;
+		var _update = _this.update;
+		var _destroy = _this.destroy;
+
+		/**
+		 * This method can be extended, and will load before the state starts
+		 */
+		this.preload = function() {
+			_preload();
+		};
+
+		/**
+		 * This method can be extended, and will be called when the object is created
+		 */
+		this.create = function() {
+			_create();
+		};
+
+		/**
+		 * This method can be extended, and will be called every frame after the create method is called.  Be causious to not put to much into this method.
+		 */
+		this.update = function() {
+			_update();
+		};
+
+		this.destory = function() {
+			destroy();
+		};
 
 		/**
 		 * Set the Enabled to the boolean passed through. If true, trigger the onEnable function, if false

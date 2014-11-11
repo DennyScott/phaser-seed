@@ -12,7 +12,6 @@
 	var TagManager = function(game) {
 
 		var _this = this;
-		this.game = undefined; //The game in which this TagManager exists
 		this.tags = {}; //This dictionary of tags that exists within the game
 
 		/**
@@ -22,7 +21,7 @@
 		 * @param {Phaser.Game} game The game in which this manager exists
 		 */
 		var _constructor = function(game) {
-			this.game = game;
+			Zephyr.managers.baseManager.call(_this, game);
 		};
 
 		/**
@@ -64,6 +63,7 @@
 		_constructor(game);
 	};
 
+	TagManager.prototype = Object.call(Zephyr.managers.baseManager.prototype);
 	Zephyr.managers = Zephyr.managers || {};
 	Zephyr.managers.tagManager = TagManager;
 })();

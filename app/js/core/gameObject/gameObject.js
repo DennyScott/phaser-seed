@@ -40,7 +40,13 @@
 
 		_constructor(game, name, imageKey, frame);
 
+		var _preload = _this.preload;
+		var _create = _this.create;
+		var _update = _this.update;
+		var _destroy = _this.destroy;
+
 		this.preload = function() {
+			_preload();
 			_.forEach(_this.components, function(component) {
 				//Cycles through each component and preloads it
 				component.preload();
@@ -53,6 +59,7 @@
 		 * @method create
 		 */
 		this.create = function() {
+			_create();
 			if (_this.isActive) {
 				_.forEach(_this.components, function(component) {
 					component.create();
@@ -66,6 +73,7 @@
 		 * @method update
 		 */
 		this.update = function() {
+			_update();
 			if (_this.isActive) {
 				_.forEach(_this.components, function(component) {
 					if (_.isUndefined(component.isEnabled) || component.isEnabled() === true) {
@@ -82,7 +90,7 @@
 		 * @method destroy
 		 */
 		this.destroy = function() {
-
+			_destroy();
 		};
 
 		/**

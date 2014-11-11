@@ -2,7 +2,7 @@
 	var Zephyr = window.Zephyr || {};
 	var GameObject = Zephyr.gameObject;
 	var _ = window._ || {};
-	
+
 	/**
 	 * GameObjectManager will contain all objects that are being used
 	 * in the current state.  It can be used to store objects and then
@@ -11,12 +11,43 @@
 	 * @class GameObjectManager
 	 */
 	var GameObjectManager = function(game) {
-		this.game = undefined;
 		var _this = this;
 		this.gameObjects = {}; //This will contain all of the gameobjects, stored unique with a key
 
 		var _constructor = function(game) {
-			this.game = game;
+			Zephyr.managers.baseManager.call(_this, game);
+		};
+
+		_constructor(game);
+
+		var _preload = _this.preload;
+		var _create = _this.create;
+		var _update = _this.update;
+		var _destroy = _this.destroy;
+
+		/**
+		 * This method can be extended, and will load before the state starts
+		 */
+		this.preload = function() {
+			_preload();
+		};
+
+		/**
+		 * This method can be extended, and will be called when the object is created
+		 */
+		this.create = function() {
+			_create();
+		};
+
+		/**
+		 * This method can be extended, and will be called every frame after the create method is called.  Be causious to not put to much into this method.
+		 */
+		this.update = function() {
+			_update();
+		};
+
+		this.destory = function() {
+			destroy();
 		};
 
 		/**
@@ -89,7 +120,7 @@
 		 * @return {GameObject} The first GameObject found that has the given tag
 		 */
 		this.findGameObjectByTag = function(tag) {
-			_.forEach(_this.gameObjects, function (value) {
+			_.forEach(_this.gameObjects, function(value) {
 				if (!_.isUndefined(value.tag) && value.tag === tag) {
 					return value;
 				}
@@ -105,16 +136,16 @@
 		 */
 		this.findAllGameObjectsByTag = function(tag) {
 			var objects = []; //This will have objects added to it, and then returned to the user at the end
-			_.forEach(_this.gameObjects, function (value) {
+			_.forEach(_this.gameObjects, function(value) {
 				if (!_.isUndefined(value.tag) && value.tag === tag) {
 					objects.push(value);
 				}
 			});
 			return objects;
 		};
-
-		_constructor(game);
 	};
+
+	GameObjectManager.prototype = Object.call(Zephyr.managers.baseManager.prototype);
 
 	Zephyr.managers = Zephyr.managers || {};
 	Zephyr.managers.gameObjectManager = GameObjectManager;
