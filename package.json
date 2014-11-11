@@ -37,6 +37,7 @@
   "browserify-shim": {
     "lodash": "global:_",
     "phaser": "global:Phaser",
-    "loki": "global:loki"
+    "loki": "global:loki",
+    "Stats": "global:Stats"
   }
 }

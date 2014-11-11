@@ -23,7 +23,10 @@ module.exports = {
     dest: dest
   },
   lib: {
-    src: [src + '/lib/lodash/dist/lodash.min.js', src + '/lib/phaser/build/phaser.js', src + '/lib/lokijs/src/lokijs.js'],
+    src: [src + '/lib/lodash/dist/lodash.min.js', 
+          src + '/lib/phaser/build/phaser.js', 
+          src + '/lib/lokijs/src/lokijs.js',
+          src + '/lib/stats.js/build/stats.min.js'],
     dest: dest + '/lib'
   },
   browserify: {
