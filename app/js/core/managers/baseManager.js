@@ -6,32 +6,27 @@
 	 *
 	 * @class BaseManager
 	 */
-	var BaseManager = function(game) {
-		this.game = undefined;
-		var _this = this;
-
-		var _constructor = function(game) {
-			_this.game = game;
+	class BaseManager {
+		constructor(game) {
+			this.game = game;
 		};
-
-		_constructor(game);
 
 		/**
 		 * This method can be extended, and will load before the state starts
 		 */
-		this.preload = function() {};
+		preload() {};
 
 		/**
 		 * This method can be extended, and will be called when the object is created
 		 */
-		this.create = function() {};
+		create() {};
 
 		/**
 		 * This method can be extended, and will be called every frame after the create method is called.  Be causious to not put to much into this method.
 		 */
-		this.update = function() {};
+		update() {};
 
-		this.destory = function() {};
+		destory() {};
 	};
 
 	module.exports = BaseManager;

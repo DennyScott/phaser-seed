@@ -28,7 +28,6 @@ var movement = require('../scripts/movement.js');
 			this.sprite.scale.x = 0.2;
 			this.sprite.scale.y = 0.2;
 			this.sprite.anchor.setTo(0.5, 0.5);
-
 			//Tell Phaser that the player will use the Arcade physics engine
 			game.physics.arcade.enable(this.sprite);
 		};
