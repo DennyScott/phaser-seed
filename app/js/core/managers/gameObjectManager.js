@@ -11,14 +11,12 @@
 	 *
 	 * @class GameObjectManager
 	 */
-	var GameObjectManager = function(game) {
+	var GameObjectManager = function() {
 
-		var _game; //The game that exists within
 		var _this = this;
 		this.gameObjects = {}; //This will contain all of the gameobjects, stored unique with a key
 
-		var _constructor = function(game) {
-			_game = game;
+		var _constructor = function() {
 		};
 
 		/**
@@ -31,14 +29,14 @@
 		 * @return {string} The gameObject stored in the gameObjects library.
 		 */
 		this.add = function(key, object) {
-			if (typeof object === 'undefined' || object instanceof GameObject) {
-				if (typeof _this.gameObjects[key] !== 'undefined') {
+			if (_.isUndefined(object) || object instanceof GameObject) {
+				if (!_.isUndefined(_this.gameObjects[key])) {
 					//If an object with the given key already exists within the gameObjects dictionary
 
 					var passed = _this.gameObjects[key]; //Used to check if the key already exists
 					var i = 0; //Used to concat onto the string to try and find a unique id
 
-					while (typeof passed !== 'undefined') {
+					while (!_.isUndefined(passed)) {
 						//Iterate through ints until a string is created that is not a key in the gameObject dictionary
 						i++;
 
@@ -75,7 +73,7 @@
 		 */
 		this.remove = function(key) {
 			var point = _this.gameObjects[key];
-			if (point) {
+			if (!_.isUndefined(point)) {
 				point.key = undefined;
 				delete _this.gameObjects[key];
 				return point;
@@ -91,7 +89,7 @@
 		 * @return {GameObject} The first GameObject found that has the given tag
 		 */
 		this.findGameObjectByTag = function(tag) {
-			_.forEach(_this.gameObjects, function (value, key) {
+			_.forEach(_this.gameObjects, function (value) {
 				if (!_.isUndefined(value.tag) && value.tag === tag) {
 					return value;
 				}
@@ -107,7 +105,7 @@
 		 */
 		this.findAllGameObjectsByTag = function(tag) {
 			var objects = []; //This will have objects added to it, and then returned to the user at the end
-			_.forEach(_this.gameObjects, function (value, key) {
+			_.forEach(_this.gameObjects, function (value) {
 				if (!_.isUndefined(value.tag) && value.tag === tag) {
 					objects.push(value);
 				}
@@ -115,7 +113,7 @@
 			return objects;
 		};
 
-		_constructor(game);
+		_constructor();
 	};
 
 	Zephyr.managers = Zephyr.managers || {};
