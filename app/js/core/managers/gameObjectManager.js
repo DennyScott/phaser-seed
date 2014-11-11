@@ -32,11 +32,11 @@ class GameObjectManager extends baseManager {
 	 *
 	 * @method add
 	 * @param {string} key A unique string key to find the given object by
-	 * @param {GameObject} object OPTIONAL The gameObject to store within the gameObjects dictionary.  If not passed, a new gameObject will be created
+	 * @param {GameObject} object The gameObject to store within the gameObjects dictionary.
 	 * @return {string} The gameObject stored in the gameObjects library.
 	 */
 	add(key, object) {
-		if (_.isUndefined(object) || object instanceof GameObject) {
+		if (!_.isUndefined(object) && object instanceof GameObject) {
 			if (!_.isUndefined(this.gameObjects[key])) {
 				//If an object with the given key already exists within the gameObjects dictionary
 

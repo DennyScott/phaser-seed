@@ -21,7 +21,7 @@ class Movement extends scriptBehaviour{
 	 * This method can be extended, and will be called when the object is created
 	 */
 	create() {
-		super.create();
+		super();
 		this._createKeyInputs();
 	};
 
@@ -29,12 +29,12 @@ class Movement extends scriptBehaviour{
 	 * This method can be extended, and will be called every frame after the create method is called.  Be causious to not put to much into this method.
 	 */
 	update() {
-		super.update();
+		super();
 		this._movePlayer();
 	};
 
 	destory() {
-		super.destroy();
+		super();
 	};
 
 	/**

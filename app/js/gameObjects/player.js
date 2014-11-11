@@ -19,26 +19,25 @@ var movement = require('../scripts/movement.js');
 		};
 
 		preload() {
-			super.preload();
+			super();
 		};
 
 		create(x, y) {
-			super.create();
+			super();
 			this.sprite = game.add.sprite(x, y, this.texture);
 			this.sprite.scale.x = 0.2;
 			this.sprite.scale.y = 0.2;
 			this.sprite.anchor.setTo(0.5, 0.5);
-
 			//Tell Phaser that the player will use the Arcade physics engine
 			game.physics.arcade.enable(this.sprite);
 		};
 
 		update() {
-			super.update();
+			super();
 		};
 
 		destroy() {
-			super.destroy();
+			super();
 		};
 	};
 
