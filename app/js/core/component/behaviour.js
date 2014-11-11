@@ -1,42 +1,36 @@
-var component = require('./component.js');
+var Component = require('./component.js');
+
+/**
+ * The Behaviour class are Components that can be enabled or disabled.
+ *
+ * @class Behaviour
+ *
+ */
+ class Behaviour extends Component {
+	constructor(game){
+		super(game);
+		this._enabled = true;//Set the inital enable of this object to true
+	}
+
 	/**
-	 * The Behaviour class are Components that can be enabled or disabled.
+	 *Check if the current Behaviour object is enabled.
 	 *
-	 * @class Behaviour
+	 * @return boolean Is the object enabled
+	 */	
+	isEnabled() {
+		return this._enabled;
+	}
+
+	/**
+	 * Set the Behaviour Object as enabled or disabled. A disabled obejct will not update.
 	 *
+	 * @param en The value to set the enabled or disabled object o.
 	 */
-	var Behaviour = function() {
-		var _this = this;
-		var _enabled = true;
+	setEnabled(en){
+		this._enabled = en;
+	}
 
 
-		var _constructor = function(game) {
-			component.call(_this, game);
+}
 
-		};
-
-		/**
-		 *Check if the current Behaviour object is enabled.
-		 *
-		 * @return boolean Is the object enabled
-		 */
-		this.isEnabled = function() {
-			return _enabled;
-		};
-
-		/**
-		 * Set the Behaviour Object as enabled or disabled. A disabled obejct will not update.
-		 *
-		 * @param en The value to set the enabled or disabled object o.
-		 */
-		this.setEnabled = function(en) {
-			_enabled = en;
-		};
-
-		_constructor(game);
-	};
-
-	Behaviour.prototype = component.prototype;
-
-	module.exports = Behaviour;
-
+module.exports = Behaviour;

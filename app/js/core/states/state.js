@@ -1,22 +1,22 @@
-	var State = function() {
-		var _this = this;
+	 class State {
 
-		var _constructor = function() {
-
-		};
-
-		this.preload = function() {
-		};
-
-		this.create = function() {
+		constructor() {
 
 		};
 
-		this.update = function() {
+		preload() {
+		
+		};
+
+		create() {
 
 		};
 
-		_constructor();
+		update() {
+
+		};
+
+
 	};
 
 	module.exports = State;

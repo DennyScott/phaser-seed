@@ -16,6 +16,7 @@ game.state.add('menu', new menu());
 // game.state.add('victory', window.states.victoryState);
 
 console.log('hello there');
+
 //Start the boot state
 game.state.start('boot');
 

@@ -15,29 +15,25 @@ var gulp         = require('gulp');
 var handleErrors = require('../util/handleErrors');
 var source       = require('vinyl-source-stream');
 var config       = require('../config').browserify;
+var es6ify = require('es6ify');
+
+var es6ifyRuntime = es6ify.runtime;
+es6ifyRuntime.debug = true;
 
 gulp.task('browserify', function(callback) {
 
   var bundleQueue = config.bundleConfigs.length;
 
   var browserifyThis = function(bundleConfig) {
-
-    var bundler = browserify({
-      // Required watchify args
-      cache: {}, packageCache: {}, fullPaths: true,
-      // Specify the entry point of your app
-      entries: bundleConfig.entries,
-      // Add file extentions to make optional in your requires
-      extensions: config.extensions,
-      // Enable source maps!
-      debug: config.debug
-    });
+    var bundler = browserify(es6ifyRuntime, {debug:true});
 
     var bundle = function() {
       // Log when bundling starts
       bundleLogger.start(bundleConfig.outputName);
 
       return bundler
+        .transform(es6ify)
+        .add(bundleConfig.entries)
         .bundle()
         // Report compile errors
         .on('error', handleErrors)

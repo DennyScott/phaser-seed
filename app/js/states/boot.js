@@ -64,4 +64,3 @@ var state = require('../core/core.js').state;
 
 	Boot.prototype = Object.create(state.prototype);
 	module.exports = Boot;
-
