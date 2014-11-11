@@ -1,6 +1,6 @@
 var gameObject = require('../gameObject/gameObject.js');
 var baseManager = require('./baseManager.js');
-var _ = window._ || {};
+var _ = require('lodash');
 
 /**
  * Used to store existing tags in, and keep track of data that needs to be associated with the tags.  This is not

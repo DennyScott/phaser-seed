@@ -1,6 +1,6 @@
 var BaseObject = require('../base/baseObject.js');
 var Component = require('../component/component.js');
-var _ = window._ || {};
+var _ = require('lodash');
 
 
 /**
@@ -32,7 +32,6 @@ class GameObject extends BaseObject {
 		this.tag = undefined; //The tag associated with this class.
 		this.layer = undefined;
 		this.isActive = true;
-		console.log(this);
 	}
 
 	/**
@@ -40,9 +39,8 @@ class GameObject extends BaseObject {
 	 *
 	 * @method preload
 	 */
-	preload(context) {
+	preload() {
 		super.preload();
-		console.log(context);
 		_.forEach(this.components, function(component) {
 			//Cycles through each component and preloads it
 			component.preload();

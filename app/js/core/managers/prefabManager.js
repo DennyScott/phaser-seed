@@ -1,7 +1,7 @@
 var GameObject = require('../gameObject/gameObject.js');
 var baseManager = require('./baseManager.js');
 
-var _ = window._ || {};
+var _ = require('lodash');
 
 /**
  * Used to hold all existing prefabs contained within a scene.  Items added to this manager

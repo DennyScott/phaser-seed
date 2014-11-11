@@ -1,4 +1,4 @@
-var Phaser = window.Phaser || {};
+var Phaser = require('phaser');
 // We initialising Phaser
 window.game = new Phaser.Game(1000, 680, Phaser.AUTO, 'gameDiv');
 

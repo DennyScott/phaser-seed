@@ -1,6 +1,6 @@
 var GameObject = require('../gameObject/gameObject.js');
 var baseManager = require('./baseManager.js');
-var _ = window._ || {};
+var _ = require('lodash');
 
 
 /**
