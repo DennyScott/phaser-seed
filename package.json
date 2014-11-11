@@ -39,5 +39,9 @@
     "phaser": "global:Phaser",
     "loki": "global:loki",
     "Stats": "global:Stats"
+  },
+  "scripts": {
+    "install": "bower install",
+    "start": "gulp"
   }
 }
