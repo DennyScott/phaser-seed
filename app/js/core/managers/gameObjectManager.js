@@ -1,7 +1,7 @@
 (function() {
 	var Zephyr = window.Zephyr || {};
 	var GameObject = Zephyr.gameObject;
-	var game = window.game || {};
+	// var game = window.game || {};
 	var _ = window._ || {};
 	
 	/**
