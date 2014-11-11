@@ -5,7 +5,7 @@ class Movement extends scriptBehaviour{
 
 	 constructor(gameObject, speed) {
 		super(game, gameObject);
-		this.speed = 2;
+		this.speed = 200;
 		this.cursor = undefined;
 		this.wasd = undefined;
 	};
@@ -63,14 +63,14 @@ class Movement extends scriptBehaviour{
 		//If the left arrow key is pressed
 		if (this.cursor.left.isDown || this.wasd.left.isDown) {
 			//Move the player to the left
-			this.gameObject.sprite.body.velocity.x = -200;
+			this.gameObject.sprite.body.moveLeft(-1 * this.speed);
 			// this.player.animations.play('left'); //Start the left animation
 		}
 
 		//If the right arrow is pressed
 		else if (this.cursor.right.isDown || this.wasd.right.isDown) {
 			//Move the player down
-			this.gameObject.sprite.body.velocity.x = 200;
+			this.gameObject.sprite.body.velocity.x = this.speed;
 			// this.player.animations.play('right'); //Start the right animation
 		} else {
 			this.gameObject.sprite.body.velocity.x = 0;
@@ -79,14 +79,14 @@ class Movement extends scriptBehaviour{
 		//If the down arrow is pressed
 		if (this.cursor.down.isDown || this.wasd.down.isDown) {
 			//Move the player to the right
-			this.gameObject.sprite.body.velocity.y = 200;
+			this.gameObject.sprite.body.velocity.y = this.speed;
 			// this.player.animations.play('right'); //Start the right animation
 		}
 
 		//If the up arrow is pressed
 		else if (this.cursor.up.isDown || this.wasd.up.isDown) {
 			//Move the player up
-			this.gameObject.sprite.body.velocity.y = -200;
+			this.gameObject.sprite.body.velocity.y = -1 * this.speed;
 			// this.player.animations.play('right'); //Start the right animation
 		}
 
@@ -97,13 +97,6 @@ class Movement extends scriptBehaviour{
 			// this.player.animations.stop(); //Stop all animations
 			// this.player.frame = 0 //Set the splayer to fram 0, which is stand still
 		}
-
-		// //If the up arrow key is pressed and the player is touching the ground
-		// if ((this.cursor.up.isDown || this.wasd.up.isDown) && this.player.body.onFloor()) {
-		// 	//Move the player upward (jump)
-		// 	this.player.body.velocity.y = -320;
-		// 	this.jumpSound.play();
-		// }
 	};
 };
 
