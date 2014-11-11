@@ -1,5 +1,5 @@
 var Behaviour = require('./behaviour.js');
-var _ = window._ || {};
+var _ = require('lodash');
 
 /**
  * ScriptBehaviour is the base class that every script derives from. ScriptBehaviour adds imporant functions and variables

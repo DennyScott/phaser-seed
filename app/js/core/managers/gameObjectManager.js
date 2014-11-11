@@ -37,7 +37,7 @@ class GameObjectManager extends baseManager {
 	 */
 	add(key, object) {
 		if (_.isUndefined(object) || object instanceof GameObject) {
-			if (!_.isUndefined(_this.gameObjects[key])) {
+			if (!_.isUndefined(this.gameObjects[key])) {
 				//If an object with the given key already exists within the gameObjects dictionary
 
 				var passed = this.gameObjects[key]; //Used to check if the key already exists
@@ -77,7 +77,7 @@ class GameObjectManager extends baseManager {
 	update() {
 		super();
 		//Cycles through all objects created and stored in the manager, and runs their update functions.
-		_.forEach(_this.gameObjects, function(value) {
+		_.forEach(this.gameObjects, function(value) {
 			if (_.isFunction(value.update)) { //checks to see if it has an update function
 				value.update();
 			}
@@ -95,7 +95,7 @@ class GameObjectManager extends baseManager {
 	 * @return {int} The amount of objects stored within the gameObjects dictionary
 	 */
 	count() {
-		return _.size(_this.gameObjects);
+		return _.size(this.gameObjects);
 	}
 
 	/**

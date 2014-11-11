@@ -1,44 +1,37 @@
 var state = require('../core/core.js').state;
 
 
-	var Load = function() {
-		var _this = this;
+	class Load extends state {
 
-		var _constructor = function() {
-			state.call(_this);
+		constructor() {
+			super();
 		};
 
-		_constructor();
-
-		var _preload = _this.preload;
-		var _create = _this.create;
-		var _update = _this.update;
-
-		this.preload = function() {
-			_preload();
+		preload() {
+			super.preload();
 			Phaser = window.Phaser || {};
 			game = window.game || {};
 
 
-			_this.createLoadScreen(); //Creates the load screen to watch.  This must be first
+			this.createLoadScreen(); //Creates the load screen to watch.  This must be first
 
 			//Loads all needed Assets
-			_this.loadImageAssets();
-			_this.loadSpritesheetAssets();
-			_this.loadTilesetAssets();
-			_this.loadAudioAssets();
+			this.loadImageAssets();
+			this.loadSpritesheetAssets();
+			this.loadTilesetAssets();
+			this.loadAudioAssets();
 		};
 
-		this.create = function() {
-			_create();
-			_this.loadNextState();
+		create() {
+			super.create();
+			this.loadNextState();
 		};
 
-		this.update = function() {
-			_update();
+		update() {
+			super.update();
 		};
 
-		this.createLoadScreen = function() {
+		createLoadScreen() {
 			//Add a loading... label on the screen
 			var loadingLabel = game.add.text(game.world.centerX, 150, 'loading...', {
 				font: '30px Arial',
@@ -53,34 +46,26 @@ var state = require('../core/core.js').state;
 		};
 
 
-		this.loadAudioAssets = function() {};
+		loadAudioAssets() {};
 
 
-
-		this.loadImageAssets = function() {
+		loadImageAssets() {
 			//Load a new asset that we will use in the menu state
 			game.load.image('player', 'assets/images/RedSquare.png');
 			game.load.image('nextButton', 'assets/images/BlackLabel.png');
-		}
+		};
 
 
-
-
-		this.loadNextState = function() {
+		loadNextState() {
 			game.state.start('menu');
 		};
 
 
-
-		this.loadSpritesheetAssets = function() {};
-
+		loadSpritesheetAssets() {};
 
 
-		this.loadTilesetAssets = function() {};
+		loadTilesetAssets() {};
 
 	};
-
-	Load.prototype = Object.create(state.prototype);
-
 
 	module.exports = Load;

@@ -2,21 +2,14 @@ var state = require('../core/core.js').state;
 
 
 
-	var Boot = function() {
-		var _this = this;
+	class Boot extends state {
 
-		var _constructor = function() {
-			state.call(_this);
+		constructor() {
+			super()
 		};
 
-		_constructor();
-
-		var _preload = _this.preload;
-		var _create = _this.create;
-		var _update = _this.update;
-
-		this.preload = function() {
-			_preload();
+		preload() {
+			super.preload();
 			Phaser = window.Phaser || {};
 			game = window.game || {};
 
@@ -24,33 +17,33 @@ var state = require('../core/core.js').state;
 			game.load.image('progressBar', 'assets/images/progressBar.png');
 		};
 
-		this.create = function() {
-			_create();
-			_createBackgroundColor();
-			_createPhysicsStream();
-			_prepareForMobile();
-			_loadNextState();
+		create() {
+			super.create();
+			this._createBackgroundColor();
+			this._createPhysicsStream();
+			this._prepareForMobile();
+			this._loadNextState();
 		};
 
-		this.update = function() {
-			_update();
+		update() {
+			super.update();
 		};
 
 
-		var _createBackgroundColor = function() {
+		_createBackgroundColor() {
 			//Set the background color of the stage to a light blue color
 			game.stage.backgroundColor = '#aaaaaa';
 		};
 
-		var _createPhysicsStream = function() {
+		_createPhysicsStream() {
 			game.physics.startSystem(Phaser.Physics.ARCADE);
 		};
 
-		var _loadNextState = function() {
+		_loadNextState() {
 			game.state.start('load');
 		};
 
-		var _prepareForMobile = function() {
+		_prepareForMobile() {
 			if (!game.device.desktop) {
 				game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 				document.body.style.backgroundColor = '#aaaaaa';
@@ -72,7 +65,5 @@ var state = require('../core/core.js').state;
 
 
 	};
-
-	Boot.prototype = Object.create(state.prototype);
 	module.exports = Boot;
 

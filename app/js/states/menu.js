@@ -1,35 +1,28 @@
 var state = require('../core/core.js').state;
 
-	var Menu = function() {
-		var _this = this;
+	class Menu extends state {
 
-		var _constructor = function() {
-			state.call(_this);
+		constructor() {
+			super();
 		};
 
-		_constructor();
-
-		var _preload = _this.preload;
-		var _create = _this.create;
-		var _update = _this.update;
-
-		this.preload = function() {
-			_preload();
+		preload() {
+			super.preload();
 			Phaser = window.Phaser || {};
 			game = window.game || {};
 		};
 
-		this.create = function() {
-			_create();
-			_this.createButton();
-			_this.createNameLabel();
+		create() {
+			super.create();
+			this.createButton();
+			this.createNameLabel();
 		};
 
-		this.update = function() {
-			_update();
+		update() {
+			super.update();
 		};
 
-		this.createNameLabel = function() {
+		createNameLabel() {
 			//Display the name of the game
 			var nameLabel = game.add.text(game.world.centerX, -50, 'Donald Dingberg!', {
 				font: '90px Geo',
@@ -44,44 +37,41 @@ var state = require('../core/core.js').state;
 				.start();
 		};
 
-		this.createButton = function() {
+		createButton() {
 			var startX = game.world.width + 180;
 			var endX = game.world.centerX;
 
-			_this.nextButton = game.add.button(startX, game.world.height * 0.9, 'nextButton', _this.start, _this);
-			_this.nextButton.anchor.setTo(0.5, 0.55);
+			this.nextButton = game.add.button(startX, game.world.height * 0.9, 'nextButton', this.start, this);
+			this.nextButton.anchor.setTo(0.5, 0.55);
 			var text = 'Start';
-			_this.nextButton.buttonText = game.add.text(0, 0,
+			this.nextButton.buttonText = game.add.text(0, 0,
 				text, {
 					font: '30px Arial',
 					fill: '#ffffff',
 					align: 'center'
 				});
-			_this.nextButton.buttonText.anchor.setTo(0.5, 0.5);
-			_this.nextButton.addChild(_this.nextButton.buttonText);
+			this.nextButton.buttonText.anchor.setTo(0.5, 0.5);
+			this.nextButton.addChild(this.nextButton.buttonText);
 
 
-			game.add.tween(_this.nextButton).to({
+			game.add.tween(this.nextButton).to({
 				x: endX
 			}, 1000, Phaser.Easing.Bounce.Out, true, 500);
 
 
-			_this.nextButton.input.useHandCursor = true; //if you want a hand cursor
+			this.nextButton.input.useHandCursor = true; //if you want a hand cursor
 		};
 
 		/**
 		 * Starts the next state
 		 * @return {void} No return value
 		 */
-		this.start = function() {
+		start() {
 			//Start the actual game
 			game.state.start('play');
 		};
 
 
 	};
-
-	Menu.prototype = Object.create(state.prototype);
-
 
 	module.exports = Menu;

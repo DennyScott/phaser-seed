@@ -15,9 +15,6 @@ game.state.add('load', new load());
 game.state.add('menu', new menu());
 game.state.add('play', new play());
 
-
-console.log('hello there');
-
 //Start the boot state
 game.state.start('boot');
 
