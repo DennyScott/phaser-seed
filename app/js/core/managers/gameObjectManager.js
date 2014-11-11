@@ -112,6 +112,9 @@
 			var point = _this.gameObjects[key];
 			if (!_.isUndefined(point)) {
 				point.key = undefined;
+				if(_.isFunction(point.destroy)) {
+					point.destroy();
+				}
 				delete _this.gameObjects[key];
 				return point;
 			}

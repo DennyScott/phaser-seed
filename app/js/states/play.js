@@ -19,7 +19,7 @@
 		this.preload = function() {
 			_preload();
 			game = window.game || {};
-			_this.gameObjectManager = Zephyr.managers.add.gameObjectManager();
+			_this.gameObjectManager = Zephyr.managers.add.gameObjectManager(game);
 		};
 
 		this.create = function() {

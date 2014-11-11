@@ -7,6 +7,8 @@
 	var Movement = function(gameObject, speed) {
 		var _this = this;
 		this.speed = 2;
+		this.cursor = undefined;
+		this.wasd = undefined;
 
 		var _constructor = function(gameObject, speed) {
 			Zephyr.component.scriptBehaviour.call(_this, game, gameObject);
@@ -43,7 +45,12 @@
 		};
 
 		this.destory = function() {
-			destroy();
+			_destroy();
+			_.forEach(_this, function(value) {
+				delete value;
+			});
+
+			_this = undefined;
 		};
 
 		/**
@@ -51,12 +58,12 @@
 		 * @return {void} No return value
 		 */
 		var _createKeyInputs = function() {
-			this.cursor = game.input.keyboard.createCursorKeys();
+			_this.cursor = game.input.keyboard.createCursorKeys();
 
 			//Captures key buttons so that the browser does not
-			game.input.keyboard.addKeyCapture([Phaser.Keyboard.UP, Phaser.Keyboard.DOWN, Phaser.Keyboard.LEFT, Phaser.Keyboard.RIGHT])
+			game.input.keyboard.addKeyCapture([Phaser.Keyboard.UP, Phaser.Keyboard.DOWN, Phaser.Keyboard.LEFT, Phaser.Keyboard.RIGHT]);
 
-			this.wasd = {
+			_this.wasd = {
 				up: game.input.keyboard.addKey(Phaser.Keyboard.W),
 				left: game.input.keyboard.addKey(Phaser.Keyboard.A),
 				right: game.input.keyboard.addKey(Phaser.Keyboard.D),
@@ -70,41 +77,41 @@
 		 */
 		var _movePlayer = function() {
 			//If the left arrow key is pressed
-			if (this.cursor.left.isDown || this.wasd.left.isDown) {
+			if (_this.cursor.left.isDown || _this.wasd.left.isDown) {
 				//Move the player to the left
-				gameObject.sprite.body.velocity.x = -200;
+				_this.gameObject.sprite.body.velocity.x = -200;
 				// this.player.animations.play('left'); //Start the left animation
 			}
 
 			//If the right arrow is pressed
-			else if (this.cursor.right.isDown || this.wasd.right.isDown) {
+			else if (_this.cursor.right.isDown || _this.wasd.right.isDown) {
 				//Move the player down
-				gameObject.sprite.body.velocity.x = 200;
+				_this.gameObject.sprite.body.velocity.x = 200;
 				// this.player.animations.play('right'); //Start the right animation
 			}
 
 			else {
-				gameObject.sprite.body.velocity.x = 0;
+				_this.gameObject.sprite.body.velocity.x = 0;
 			}
 
 			//If the down arrow is pressed
-			if (this.cursor.down.isDown || this.wasd.down.isDown) {
+			if (_this.cursor.down.isDown || _this.wasd.down.isDown) {
 				//Move the player to the right
-				gameObject.sprite.body.velocity.y = 200;
+				_this.gameObject.sprite.body.velocity.y = 200;
 				// this.player.animations.play('right'); //Start the right animation
 			}
 
 			//If the up arrow is pressed
-			else if (this.cursor.up.isDown || this.wasd.up.isDown) {
+			else if (_this.cursor.up.isDown || _this.wasd.up.isDown) {
 				//Move the player up
-				gameObject.sprite.body.velocity.y = -200;
+				_this.gameObject.sprite.body.velocity.y = -200;
 				// this.player.animations.play('right'); //Start the right animation
 			}
 
 			//If neither the right or left arrow key is pressed
 			else {
 				//Stop the player
-				gameObject.sprite.body.velocity.y = 0;
+				_this.gameObject.sprite.body.velocity.y = 0;
 				// this.player.animations.stop(); //Stop all animations
 				// this.player.frame = 0 //Set the splayer to fram 0, which is stand still
 			}

@@ -85,12 +85,28 @@
 		};
 
 		/**
-		 * Destroys the gameObject.  Currently not working.
+		 * Destroys the gameObject.
 		 *
 		 * @method destroy
 		 */
 		this.destroy = function() {
 			_destroy();
+			if (_.isFunction(_this.sprite.destroy)) {
+				_this.sprite.destroy();
+			}
+			_.forEach(_this.components, function(value, key) {
+				console.log('hit');
+				if (_.isFunction(value.destroy)) {
+					value.destroy();
+				}
+				delete _this.components[key];
+			});
+
+			_.forEach(_this, function(value) {
+				value = undefined;
+			});
+
+			_this = undefined;
 		};
 
 		/**
