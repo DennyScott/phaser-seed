@@ -1,6 +1,5 @@
 (function() {
 	var Zephyr = window.Zephyr || {};
-	var game = window.game || {};
 	var _ = window._ || {};
 
 	/**
@@ -8,7 +7,7 @@
 	 * useful for behaviours while scripting.
 	 *
 	 */
-	var ScriptBehaviour = function() {
+	var ScriptBehaviour = function(game) {
 
 		var _this = this;
 		this._allTimeouts = {}; //Store all single invokes

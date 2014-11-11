@@ -1,6 +1,5 @@
 (function() {
 	var Zephyr = window.Zephyr || {};
-	var game = window.game || {};
 	var _ = window._ || {};
 	/**
 	 * Used to store existing tags in, and keep track of data that needs to be associated with the tags.  This is not
@@ -10,10 +9,10 @@
 	 *
 	 * @class TagManager
 	 */
-	var TagManager = function() {
+	var TagManager = function(game) {
 
 		var _this = this;
-		var _game; //The game in which this TagManager exists
+		this.game = undefined; //The game in which this TagManager exists
 		this.tags = {}; //This dictionary of tags that exists within the game
 
 		/**
@@ -23,7 +22,7 @@
 		 * @param {Phaser.Game} game The game in which this manager exists
 		 */
 		var _constructor = function(game) {
-			_game = game;
+			this.game = game;
 		};
 
 		/**

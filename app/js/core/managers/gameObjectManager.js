@@ -1,7 +1,6 @@
 (function() {
 	var Zephyr = window.Zephyr || {};
 	var GameObject = Zephyr.gameObject;
-	// var game = window.game || {};
 	var _ = window._ || {};
 	
 	/**
@@ -11,12 +10,13 @@
 	 *
 	 * @class GameObjectManager
 	 */
-	var GameObjectManager = function() {
-
+	var GameObjectManager = function(game) {
+		this.game = undefined;
 		var _this = this;
 		this.gameObjects = {}; //This will contain all of the gameobjects, stored unique with a key
 
-		var _constructor = function() {
+		var _constructor = function(game) {
+			this.game = game
 		};
 
 		/**
@@ -113,7 +113,7 @@
 			return objects;
 		};
 
-		_constructor();
+		_constructor(game);
 	};
 
 	Zephyr.managers = Zephyr.managers || {};

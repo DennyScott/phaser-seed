@@ -14,7 +14,7 @@
 	var PrefabManager = function(game) {
 
 		var _this = this;
-		var _game;
+		this.game = undefined;
 		this.gameObjects = {};
 
 		/**
@@ -24,7 +24,7 @@
 		 * @param {Phaser.Game} game The game object in which this prefabManager will exist
 		 */
 		var _constructor = function(game) {
-			_game = game;
+			_this.game = game;
 		};
 
 		/**

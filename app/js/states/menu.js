@@ -1,5 +1,5 @@
 (function() {
-	var Zephyr;
+	var Zephyr = window.Zephyr || {};;
 	var Phaser;
 	var game;
 
@@ -19,7 +19,6 @@
 
 		this.preload = function() {
 			_preload();
-			Zephyr = window.Zephyr || {};
 			Phaser = window.Phaser || {};
 			game = window.game || {};
 		};

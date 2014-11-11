@@ -1,20 +1,18 @@
 (function() {
-	var Zephyr = window.Zephyr || {};
-	var game = window.game || {};
+	var Zephyr = window.Zephyr;
 	/**
 	 * The Behaviour class are Components that can be enabled or disabled.
 	 *
 	 * @class Behaviour
 	 *
 	 */
-	var Behaviour = function() {
+	var Behaviour = function(game) {
 		var _this = this;
 		var _enabled = true;
 
 
 		var _constructor = function(game) {
 			Zephyr.component.__component__.call(_this, game);
-
 		};
 
 		/**

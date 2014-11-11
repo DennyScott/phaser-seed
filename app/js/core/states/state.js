@@ -3,7 +3,6 @@
 
 	var State = function() {
 		var _constructor = function() {
-
 		};
 
 		this.preload = function() {
