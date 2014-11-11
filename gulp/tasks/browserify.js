@@ -17,15 +17,12 @@ var source       = require('vinyl-source-stream');
 var config       = require('../config').browserify;
 var es6ify = require('es6ify');
 
-var es6ifyRuntime = es6ify.runtime;
-es6ifyRuntime.debug = true;
-
 gulp.task('browserify', function(callback) {
 
   var bundleQueue = config.bundleConfigs.length;
 
   var browserifyThis = function(bundleConfig) {
-    var bundler = browserify(es6ifyRuntime, {debug:true});
+    var bundler = browserify(es6ify.runtime, {debug:true});
 
     var bundle = function() {
       // Log when bundling starts
