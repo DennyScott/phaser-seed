@@ -1,6 +1,7 @@
 	var gameObjectManager = require('../core/core.js').gameObjectManager; 
 	var state = require('../core/core.js').state;
 	var player = require('../gameObjects/player.js');
+	var loki = require('loki');
 
 	class Play extends state {
 		
@@ -20,6 +21,11 @@
 			var _player = player(game.world.centerX, game.world.centerY);
 			this.gameObjectManager.add('player', _player);
 			console.log(this.gameObjectManager);
+			
+			// var db = new loki('loki.json');
+			// var children = db.addCollection('children');
+			// children.insert({name:"denny"});
+			// console.log(children.get(1));
 
 		};
 
