@@ -7,7 +7,6 @@
 	 */
 	var Player = function() {
 		var _this = this;
-		this.sprite = undefined;
 		this.texture = 'player';
 
 		/**
@@ -17,24 +16,41 @@
 		 * @param  {int} y    The Y coordinate to place text at
 		 */
 		var _constructor = function() {
+			Zephyr.gameObject.call(_this, game, 'player');
+			_this.addComponent(new game.scripts.movement(_this), 'movement');
 		};
 
-		this.preload = function() {
+		_constructor(); //Call constructor
 
+		var _preload = _this.preload;
+		var _create = _this.create;
+		var _update = _this.update;
+		var _destroy = _this.destroy;
+
+		this.preload = function() {
+			_preload();
 		};
 
 		this.create = function(x, y) {
-			this.sprite = game.add.sprite(x, y, _this.texture);
-			this.sprite.scale.x = 0.2;
-			this.sprite.scale.y = 0.2;
+			_create();
+			_this.sprite = game.add.sprite(x, y, _this.texture);
+			_this.sprite.scale.x = 0.2;
+			_this.sprite.scale.y = 0.2;
+			_this.sprite.anchor.setTo(0.5, 0.5);
+
+			//Tell Phaser that the player will use the Arcade physics engine
+			game.physics.arcade.enable(_this.sprite);
 		};
 
 		this.update = function() {
+			_update();
+		};
 
+		this.destroy = function() {
+			_destroy();
 		};
 
 
-		_constructor(); //Call constructor
 	};
 
 	Player.prototype = Object.create(Zephyr.gameObject.prototype);

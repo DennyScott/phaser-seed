@@ -19,7 +19,7 @@
 		this.frame = undefined;
 		this.tag = undefined;
 		this.layer = undefined;
-		this.isActive = false;
+		this.isActive = true;
 
 		/**
 		 * The Base Constructor for the GameObject class
@@ -31,7 +31,7 @@
 		 * @param {int} frame The frame numbers for the passed spritesheet.  Leave undefined if not using a spritesheet.
 		 */
 		var _constructor = function(game, name, imageKey, frame) {
-			Zephyr.gameObject.gameObject.call(_this, game); //Initalizes the BaseObject Super class
+			Zephyr.base.__baseObject__.call(_this, game); //Initalizes the BaseObject Super class
 			_this.name = name || ""; //The name of the object
 			_this.imageKey = imageKey || ""; //The image for the object
 			_this.frame = frame || undefined;

@@ -9,6 +9,7 @@
 	 * @class  BaseObject
 	 */
 	var BaseObject = function(game) {
+		_this = this;
 		this.game = undefined;
 
 		/**
@@ -18,7 +19,7 @@
 		 * @param {Phaser.Game} game The game world in which this object will exist
 		 */
 		var _constructor = function(game) {
-			this.game = game;
+			_this.game = game;
 		};
 
 		/**

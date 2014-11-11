@@ -10,7 +10,7 @@ game.global = {};
 game.state.add('boot', new window.states.boot());
 game.state.add('load', new window.states.load());
 game.state.add('menu', new window.states.menu());
-// game.state.add('play', window.states.playState);
+game.state.add('play', new window.states.play());
 // game.state.add('victory', window.states.victoryState);
 
 

@@ -7,20 +7,23 @@
 	 * useful for behaviours while scripting.
 	 *
 	 */
-	var ScriptBehaviour = function(game) {
+	var ScriptBehaviour = function(game, gameObject) {
 
 		var _this = this;
 		this._allTimeouts = {}; //Store all single invokes
 		this._allIntervals = {}; //Store all invokeRepeatings
 		this.onEnable = function() {}; //onEnable trigger function
 		this.onDisable = function() {}; //onDisable trigger function
+		this.gameObject = undefined;
+
 		var _enabled = this.setEnabled;
 
-		var _constructor = function(game) {
+		var _constructor = function(game, gameObject) {
 			Zephyr.component.behaviour.call(_this, game);
+			_this.gameObject = gameObject;
 		};
 
-		_constructor(game);
+		_constructor(game, gameObject);
 
 
 		var _preload = _this.preload;
