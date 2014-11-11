@@ -1,5 +1,5 @@
 (function() {
-	var Zephyr = window.Zephyr || {};;
+	var Zephyr = window.Zephyr || {};
 	var Phaser;
 	var game;
 
@@ -86,7 +86,7 @@
 
 	};
 
-	Menu.prototype = Object.create(window.Zephyr.states.__state__.prototype);
+	Menu.prototype = Object.create(Zephyr.states.__state__.prototype);
 
 	window.states.menu = Menu;
 

@@ -16,7 +16,7 @@
 		this.gameObjects = {}; //This will contain all of the gameobjects, stored unique with a key
 
 		var _constructor = function(game) {
-			this.game = game
+			this.game = game;
 		};
 
 		/**

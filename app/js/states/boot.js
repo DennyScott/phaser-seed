@@ -67,7 +67,7 @@
 
 	};
 
-	Boot.prototype = Object.create(window.Zephyr.states.__state__.prototype);
+	Boot.prototype = Object.create(Zephyr.states.__state__.prototype);
 
 	window.states.boot = Boot;
 
