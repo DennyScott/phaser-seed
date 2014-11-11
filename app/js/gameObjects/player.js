@@ -1,5 +1,5 @@
 var gameObject = require('../core/core.js').gameObject;
-var movement = require('../scripts/arrow_movement.js');
+var movement = require('../scripts/click_movement.js');
 
 	/**
 	 * Player Class

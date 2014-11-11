@@ -14,6 +14,7 @@ class ClickMovement extends scriptBehaviour {
 	constructor(gameObject, speed) {
 		super(game, gameObject);
 		this.speed = 200; //The speed at which the player will move at.
+		this.movementTween = undefined; //Used to keep track of if the player is currently moving
 	};
 
 	/**
@@ -21,7 +22,7 @@ class ClickMovement extends scriptBehaviour {
 	 * @method preload
 	 */
 	preload() {
-		super.preload();
+		super();
 	};
 
 	/**
@@ -30,7 +31,7 @@ class ClickMovement extends scriptBehaviour {
 	 */
 	create() {
 		super();
-		this._createKeyInputs();
+		game.input.onDown.add(this._movePlayer, this);
 	};
 
 	/**
@@ -39,7 +40,6 @@ class ClickMovement extends scriptBehaviour {
 	 */
 	update() {
 		super();
-		this._movePlayer();
 	};
 
 	/**
@@ -52,20 +52,11 @@ class ClickMovement extends scriptBehaviour {
 
 	/**
 	 * Creates the inputs that a user can use to traverse the game world
-	 * @method _createKeyInputs
+	 * @method _checkPointerInputs
 	 */
-	_createKeyInputs() {
-		this.cursor = game.input.keyboard.createCursorKeys();
-
-		//Captures key buttons so that the browser does not
-		game.input.keyboard.addKeyCapture([Phaser.Keyboard.UP, Phaser.Keyboard.DOWN, Phaser.Keyboard.LEFT, Phaser.Keyboard.RIGHT]);
-
-		//Maps directions to the WASD buttons
-		this.wasd = {
-			up: game.input.keyboard.addKey(Phaser.Keyboard.W),
-			left: game.input.keyboard.addKey(Phaser.Keyboard.A),
-			right: game.input.keyboard.addKey(Phaser.Keyboard.D),
-			down: game.input.keyboard.addKey(Phaser.Keyboard.S)
+	_checkPointerInputs() {
+		if (game.input.activePointer.isDown) {
+			this._movePlayer();
 		}
 	};
 
@@ -73,38 +64,21 @@ class ClickMovement extends scriptBehaviour {
 	 * Used for converting user inputs to moving the physical player through velocity
 	 * @method _movePlayer
 	 */
-	_movePlayer() {
-		//If the left arrow key is pressed
-		if (this.cursor.left.isDown || this.wasd.left.isDown) {
-			//Move the player to the left
-			this.gameObject.sprite.body.velocity.x = -1 * this.speed;
+	_movePlayer(pointer) {
+
+		if (this.movementTween && this.movementTween.isRunning) {
+			this.movementTween.stop();
 		}
 
-		//If the right arrow is pressed
-		else if (this.cursor.right.isDown || this.wasd.right.isDown) {
-			//Move the player down
-			this.gameObject.sprite.body.velocity.x = this.speed;
-		} else {
-			this.gameObject.sprite.body.velocity.x = 0;
-		}
+		// sprite.rotation = game.physics.angleToPointer(sprite, pointer);
 
-		//If the down arrow is pressed
-		if (this.cursor.down.isDown || this.wasd.down.isDown) {
-			//Move the player to the right
-			this.gameObject.sprite.body.velocity.y = this.speed;
-		}
+		//  300 = 300 pixels per second = the speed the sprite will move at, regardless of the distance it has to travel
+		var duration = (game.physics.arcade.distanceToPointer(this.gameObject.sprite, pointer) / this.speed) * 1000;
 
-		//If the up arrow is pressed
-		else if (this.cursor.up.isDown || this.wasd.up.isDown) {
-			//Move the player up
-			this.gameObject.sprite.body.velocity.y = -1 * this.speed;
-		}
-
-		//If neither the right or left arrow key is pressed
-		else {
-			//Stop the player
-			this.gameObject.sprite.body.velocity.y = 0;
-		}
+		this.movementTween = game.add.tween(this.gameObject.sprite).to({
+			x: pointer.x,
+			y: pointer.y
+		}, duration, Phaser.Easing.Linear.None, true);
 	};
 };
 
