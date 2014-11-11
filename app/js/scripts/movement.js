@@ -63,7 +63,7 @@ class Movement extends scriptBehaviour{
 		//If the left arrow key is pressed
 		if (this.cursor.left.isDown || this.wasd.left.isDown) {
 			//Move the player to the left
-			this.gameObject.sprite.body.moveLeft(-1 * this.speed);
+			this.gameObject.sprite.body.velocity.x = -1 * this.speed;
 			// this.player.animations.play('left'); //Start the left animation
 		}
 
