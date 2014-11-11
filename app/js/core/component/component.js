@@ -6,6 +6,7 @@ var BaseObject = require('../base/baseObject.js');
  * @class Component
  */
 class Component extends BaseObject { 
+
 	/**
 	 * The constructor for the Component, this will also call the super Constructor
 	 *
@@ -21,12 +22,14 @@ class Component extends BaseObject {
 	 */
 	preload() {
 		//Preload Code goes here
+		super()
 	}
 
 	/**
 	 * This method can be extended, and will be called when the object is created
 	 */
 	create() {
+		super();
 		//Create Code goes here
 	}
 
@@ -39,7 +42,7 @@ class Component extends BaseObject {
 	}
 
 	destroy() {
-
+		super();
 	}
 }
 

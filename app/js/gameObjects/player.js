@@ -1,14 +1,10 @@
-(function() {
+var gameObject = require('../core/core.js').gameObject;
+var movement = require('../scripts/movement.js');
 
-	var game = window.game || {};
-	var Phaser = window.Phaser || {};
 	/**
 	 * Player Class
 	 */
-	var Player = function() {
-		var _this = this;
-		this.sprite = undefined;
-		this.texture = 'player';
+	class Player extends gameObject {
 
 		/**
 		 * Constructor
@@ -16,39 +12,39 @@
 		 * @param  {int} x    The X coordinate to place text at
 		 * @param  {int} y    The Y coordinate to place text at
 		 */
-		var _constructor = function() {
+		constructor() {
+			super(game, 'player');
+			this.addComponent(new movement(this), 'movement');
+			this.texture = 'player';
 		};
 
-		this.preload = function() {
-
+		preload() {
+			super.preload();
 		};
 
-		this.create = function(x, y) {
-			this.sprite = game.add.sprite(x, y, texture);
+		create(x, y) {
+			super.create();
+			this.sprite = game.add.sprite(x, y, this.texture);
 			this.sprite.scale.x = 0.2;
 			this.sprite.scale.y = 0.2;
+			this.sprite.anchor.setTo(0.5, 0.5);
+
+			//Tell Phaser that the player will use the Arcade physics engine
+			game.physics.arcade.enable(this.sprite);
 		};
 
-		this.update = function() {
-
+		update() {
+			super.update();
 		};
 
-
-		_constructor(); //Call constructor
+		destroy() {
+			super.destroy();
+		};
 	};
 
-	Player.prototype = Object.create(Zephyr.gameObject.prototype);
-
-
-	game = game || {};
-	game.objects = game.objects || {};
-	game.objects.add = game.objects.add || {};
-	game.player = Player; //Attach to objects scope
-	game.objects.add.player = function(x, y) {
+	module.exports = function(x, y) {
 		var player = new Player();
 		player.preload();
 		player.create(x, y);
 		return player;
 	};
-
-})();

@@ -1,4 +1,6 @@
 var GameObject = require('../gameObject/gameObject.js');
+var baseManager = require('./baseManager.js');
+var _ = window._ || {};
 
 
 /**
@@ -8,7 +10,9 @@ var GameObject = require('../gameObject/gameObject.js');
  *
  * @class GameObjectManager
  */
-class GameObjectManager {
+class GameObjectManager extends baseManager {
+
+
 
 	/**
 	 * Basic constuctor for the GameObjectManager class
@@ -17,6 +21,7 @@ class GameObjectManager {
 	 * @param {Phaser.Game} game The game object that this gameManager should exist within
 	 */
 	constructor(game) {
+		super(game);
 		this.game = game; //The game this exists within
 		this.gameObjects = {}; //This will contain all of the GameObjects, stored unqily in objects with a key.
 	}
@@ -31,29 +36,57 @@ class GameObjectManager {
 	 * @return {string} The gameObject stored in the gameObjects library.
 	 */
 	add(key, object) {
-		if (typeof object === 'undefined' || object instanceof GameObject) {
-			if (typeof this.gameObjects[key] !== 'undefined') {
+		if (_.isUndefined(object) || object instanceof GameObject) {
+			if (!_.isUndefined(_this.gameObjects[key])) {
 				//If an object with the given key already exists within the gameObjects dictionary
 
 				var passed = this.gameObjects[key]; //Used to check if the key already exists
 				var i = 0; //Used to concat onto the string to try and find a unique id
 
-				while (typeof passed !== 'undefined') {
+				while (!_.isUndefined(passed)) {
 					//Iterate through ints until a string is created that is not a key in the gameObject dictionary
 					i++;
 					passed = this.gameObjects[key + '' + i] //Set passed to the new value to test if this string exists already in the gameObjects dictionary
 				}
 				key = key + '' + i; //Make key this new string
 			}
-
-			object = object || new GameObject(this.game);
-
-
 			this.gameObjects[key] = object; //Set the given key to the passed GameObject
 			object.key = key;
 			return this.gameObjects[key]; //Return the new key.  If the key didn't exist, this is still your old key
 		}
-	}
+	};
+
+
+	/**
+	 * This method can be extended, and will load before the state starts
+	 */
+	preload() {
+		super();
+	};
+
+	/**
+	 * This method can be extended, and will be called when the object is created
+	 */
+	create() {
+		super();
+	};
+
+	/**
+	 * This method can be extended, and will be called every frame after the create method is called.  Be causious to not put to much into this method.
+	 */
+	update() {
+		super();
+		//Cycles through all objects created and stored in the manager, and runs their update functions.
+		_.forEach(_this.gameObjects, function(value) {
+			if (_.isFunction(value.update)) { //checks to see if it has an update function
+				value.update();
+			}
+		});
+	};
+
+	destory() {
+		super();
+	};
 
 	/**
 	 * Returns the amount of gameObjects currently stored within the gameObjects dictionary
@@ -62,12 +95,7 @@ class GameObjectManager {
 	 * @return {int} The amount of objects stored within the gameObjects dictionary
 	 */
 	count() {
-		var i = 0;
-		for (var objs in this.gameObjects) {
-			//This is a javascript trick to actually iterate through keys in a dictionary.
-			i++
-		}
-		return i;
+		return _.size(_this.gameObjects);
 	}
 
 	/**
@@ -78,10 +106,13 @@ class GameObjectManager {
 	 * @return {GameObject} Returns the removed GameObject
 	 */
 	remove(key) {
-		var point = this.gameObjects[key]; //Used to return at end of function
-		if (point) {
+		var point = this.gameObjects[key];
+		if (!_.isUndefined(point)) {
 			point.key = undefined;
-			delete this.gameObjects[key]; //Removes refrence from gameManager
+			if (_.isFunction(point.destroy)) {
+				point.destroy();
+			}
+			delete this.gameObjects[key];
 			return point;
 		}
 		return undefined;
@@ -95,13 +126,11 @@ class GameObjectManager {
 	 * @return {GameObject} The first GameObject found that has the given tag
 	 */
 	findGameObjectByTag(tag) {
-		for (var key in this.gameObjects) {
-			//Cycles through each key inside the gameObjects dictionary
-			if (this.gameObjects[key].tag) {
-				//If the tag of this object is the tag passed, return the first item found
-				return this.gameObjects[key];
+		_.forEach(this.gameObjects, function(value) {
+			if (!_.isUndefined(value.tag) && value.tag === tag) {
+				return value;
 			}
-		}
+		});
 	}
 
 	/**
@@ -112,17 +141,20 @@ class GameObjectManager {
 	 * @return {Array} containing all objects that contain the passed tag value as a tag
 	 */
 	findAllGameObjectsByTag(tag) {
-		var objects = []; //This will have objects added to it, and then be returned to the user at the end
-		for (var key in this.gameObjects) {
-			//Cycles through each key inside the gameObjects dictionary
-			if (this.gameObjects[key].tag === tag) {
-				//If the tag of this object is equal to the tag passed, add it to the objects array
-				objects.push(this.gameObjects[key]);
+		var objects = []; //This will have objects added to it, and then returned to the user at the end
+		_.forEach(this.gameObjects, function(value) {
+			if (!_.isUndefined(value.tag) && value.tag === tag) {
+				objects.push(value);
 			}
-		}
+		});
 		return objects;
 	}
 
-}
+};
 
-module.exports = GameObjectManager;
+module.exports = function(game) {
+	var manager = new GameObjectManager(game);
+	manager.preload();
+	manager.create();
+	return manager;
+}

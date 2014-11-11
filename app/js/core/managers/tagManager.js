@@ -1,81 +1,64 @@
 var gameObject = require('../gameObject/gameObject.js');
+var baseManager = require('./baseManager.js');
+var _ = window._ || {};
 
 /**
- * Used to hold all existing prefabs contained within a scene.  Items added to this manager
- * do not exist in the scene, but instead exist to create clones of to put in the game world
- * that share attributes and components.  This is used to simply save time and allow
- * run time cloning of an object the developer is able to pre-define before runtime.
+ * Used to store existing tags in, and keep track of data that needs to be associated with the tags.  This is not
+ * the place in which items are associated with tags, that is done within the GameObject class.  Instead this
+ * is used to simply store all the different tags, as well as some rudementary data that may need to be stored
+ * with that tag.  Exports iteself.
  *
- * @class PrefabManager
+ * @class TagManager
  */
- class PrefabManager {
-
+class TagManager extends baseManager{
+    
     /**
-     * Base Constructor for the PrefabManager class
+     * Base Contructor for the tagManager class
      *
      * @constructor
-     * @param {Phaser.Game} game The game object in which this prefabManager will exist
+     * @param {Phaser.Game} game The game in which this manager exists
      */
     constructor(game) {
-        this.game = game; //The game in which this manager exists in
-        this.gameObjects = {}; //The gameObjects that are prefabs
+        super(game);
+        this.game = game;  //The game in which this TagManager exists
+        this.tags = {}; //This dictionary of tags that exists within the game
     }
 
     /**
-     * Adds a gameObject to the gameObjects associative array.  If another object already has the given key, it will iterate until it finds a non used key value
+     * Adds a tag to the tags dictionary with its associated data, and then returns the tag
      *
      * @method add
-     * @param {string} key A unique string key to find the given object by
-     * @param {GameObject} object The gameObject to store within the gameObjects dictionary
-     * @return {string} The new key for this object.
+     * @param {string} tag The tag that is to be added to the tags dictionary
+     * @param {Object} data Any sort of data that needs to be stored with the tag
+     * @return {String} Returns the tag as a string
      */
-    add(key, object) {
-        if (typeof this.gameObjects[key] !== 'undefined') {
-            //If an object with the given key already exists within the gameObjects dictionary
-
-            var passed = this.gameObjects[key]; //Used to check if the key already exists
-            var i = 0; //Used to concat onto the string to try and find a unique id
-
-            while (typeof passed !== 'undefined') {
-                //Iterate through ints until a string is created that is not a key in the gameObject dictionary
-                i++;
-                passed = this.gameObjects[key + '' + i] //Set passed to the new value to test if this string exists already in the gameObjects dictionary
-            }
-            key = key + '' + i; //Make key this new string
-        }
-
-        this.gameObjects[key] = object; //Set the given key to the passed GameObject
-        return key; //Return the new key.  If the key didn't exist, this is still your old key
+    add(tag, data) {
+        this.tags[tag] = data;
+        return tag;
     }
 
     /**
-     * Returns the amount of gameObjects currently stored within the gameObjects dictionary
-     *
-     * @method count
-     * @return {int} The amount of objects stored within the gameObjects dictionary
-     */
-    count() {
-        var i = 0;
-        for (var objs in this.gameObjects) {
-            //This is a javascript trick to actually iterate through keys in a dictionary.
-            i++
-        }
-        return i;
-    }
-
-
-    /**
-     * Removes the passed keys object from the gameObjects dictionary
+     * Removes the passed tag from the tags object, and then returns the associated data
      *
      * @method remove
-     * @param {string} key The unique key to identify the object to remove
-     * @return {GameObject} Returns the removed GameObject
+     * @param {string} tag The tag to remove from the tags dictionary
+     * @return {Object} The data associated with the tag passed
      */
-    remove(key) {
-        var point = this.gameObjects[key]; //Used to return at end of function
-        delete this.gameObjects[key]; //Removes refrence from prefabManager
+    remove(tag) {
+        var point = this.tags[tag]; //used to return to the user
+        delete this.tags[tag]; //Deletes refrence to tag from the tags dictionary
         return point;
     }
-}
 
-module.exports = PrefabManager;
+    /**
+     * Counts all of the tags found within the tags dictionary
+     *
+     * @method count
+     * @return {int} the amount of tags found within the tags dictionary
+     */
+    count() {
+        return _.size(_this.tags); //Returns the amount of keys found
+    }
+};
+
+module.exports = TagManager;

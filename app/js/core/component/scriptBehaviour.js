@@ -1,4 +1,5 @@
 var Behaviour = require('./behaviour.js');
+var _ = window._ || {};
 
 /**
  * ScriptBehaviour is the base class that every script derives from. ScriptBehaviour adds imporant functions and variables
@@ -6,13 +7,16 @@ var Behaviour = require('./behaviour.js');
  *
  */
 class ScriptBehaviour extends Behaviour {
-	constructor(game){
+	
+	constructor(game, gameObject) {
 		super(game);
 		this._allTimeouts = {}; //Store all single invokes
 		this._allIntervals = {}; //Store all invokeRepeatings
-		this.onEnable = function(){}; //onEnable trigger function
-		this.onDisable = function(){}; //onDisable trigger function
+		this.onEnable = function() {}; //onEnable trigger function
+		this.onDisable = function() {}; //onDisable trigger function
+		this.gameObject = gameObject;
 	}
+
 
 	/**
 	 * Set the Enabled to the boolean passed through. If true, trigger the onEnable function, if false
@@ -20,32 +24,32 @@ class ScriptBehaviour extends Behaviour {
 	 *
 	 * @param en bool Enabled or Disabled
 	 */
-	setEnabled(en){
+	setEnabled(en) {
 		super(en);
-		if(this._enabled === true){
+		if (this._enabled === true) {
 			this.onEnable();
 		}
 
-		if(this._enabled === false){
+		if (this._enabled === false) {
 			this.onDisable();
 		}
 	}
 
 	/**
 	 *  Invoke a Method of ScriptBehaviour to be called after a passed amount of seconds
-	 * 
+	 *
 	 * @param methodName String: The name of the method to invoke
 	 * @param seconds float: The amount of seconds passed before method is called.
 	 */
-	invoke(methodName, seconds){
+	invoke(methodName, seconds) {
 
 		//Check if method exists before invoke
-		if(typeof this[methodName] === 'function'){
+		if (_.isFunction(_this[methodName])) {
 			var currentScript = this;
 			//Set a timeout for the method, and store the id
 			var timeoutId = setTimeout(function() {
 				currentScript[methodName]();
-				if(typeof currentScript._allTimeouts[timeoutId] !== 'undefined'){
+				if (!_.isUndefined(this._allTimeouts[timeoutId])) {
 					//remove the id of the timeout from the JSON object
 					delete currentScript._allTimeouts[timeoutId];
 				}
@@ -57,20 +61,39 @@ class ScriptBehaviour extends Behaviour {
 	}
 
 	/**
+	 * This method can be extended, and will load before the state starts
+	 */
+	preload() {
+		super();
+	};
+
+	/**
+	 * This method can be extended, and will be called when the object is created
+	 */
+	create() {
+		super();
+	};
+
+	/**
+	 * This method can be extended, and will be called every frame after the create method is called.  Be causious to not put to much into this method.
+	 */
+	update() {
+		super();
+	};
+
+	destory() {
+		super();
+	};
+
+	/**
 	 * Get the number of pending timeouts in the _allTimeouts variable. This will count the number
-	 * of JSON objects that remain. This will only count single invokes, and not any repeating invokes. 
+	 * of JSON objects that remain. This will only count single invokes, and not any repeating invokes.
 	 *
 	 * @return i The number of pending invokes in the JSON object
 	 */
 	getPendingTimeouts() {
-		var i = 0;
-		for(var key in this._allTimeouts){
-			i++;
-		}
-
-		return i;
+		return _.size(this.allTimeouts);
 	}
-
 
 	/*
 	 * Get the number of pending intervals in the _allIntervals variable. This will count the number
@@ -80,12 +103,7 @@ class ScriptBehaviour extends Behaviour {
 	 *
 	 */
 	getPendingIntervals() {
-		var i = 0;
-		for(var key in this._allIntervals){
-			i++;
-		}
-
-		return i;
+		return _.size(this._allIntervals);
 	}
 
 	/**
@@ -95,11 +113,11 @@ class ScriptBehaviour extends Behaviour {
 	 *  @param seconds float: The amount of seconds passed before method is called.
 	 *
 	 */
-	invokeRepeating(methodName, seconds){
+	invokeRepeating(methodName, seconds) {
 		//Check if method exists in ScriptBehaviour
-		if(typeof this[methodName] === 'function'){
+		if (_.isFunction(this[methodName])) {
 			var currentScript = this;
-			
+
 			//Set Interval for method, and store the id.
 			var intervalId = setInterval(function() {
 				currentScript[methodName]();
@@ -116,18 +134,18 @@ class ScriptBehaviour extends Behaviour {
 	 *
 	 */
 	cancelInvokes() {
-		//Cancel all Timouts (Invokes)
-		for(var key in this._allTimeouts){
+		//Cancel all Timeouts (Invokes)
+		_.forEach(this._allTimeouts, function(component, key) {
 			clearTimeout(key);
 			delete this._allTimeouts[key];
-		}
+		});
 
-		//Cancel all Intervals(InvokeRepeating)
-		for(var iKey in this._allIntervals){
-			clearInterval(iKey);
-			delete this._allIntervals[iKey];
-		}
-	}
+		//Cancel all Intervals(Invoke Repeating)
+		_.forEach(this._allIntervals, function(component, key) {
+			clearTimeout(key);
+			delete this._allIntervals[key];
+		});
+	};
 
 	/**
 	 * Check if a invoke is pending for the passed method name. We will iterage through _allIntervals and _allTimouts, and see if any
@@ -135,27 +153,27 @@ class ScriptBehaviour extends Behaviour {
 	 *
 	 *@param methodName String: Method name to check if there are any invokes pending against
 	 */
-	isInvoking(methodName){
+	isInvoking(methodName) {
 
 		//Check all timeouts
-		for(var key in this._allTimeouts){
-			if(this._allTimeouts[key] === methodName){
+		_.forEach(this._allTimeouts, function(component) {
+			if (component === methodName) {
 				return true;
 			}
-		}
+		});
 
-		//Check all Intervals
-		for(var iKey in this._allIntervals){
-			if(this._allIntervals[iKey] === methodName){
+		_.forEach(this._allIntervals, function(component) {
+			if (component === methodName) {
 				return true;
 			}
-		}
+		});
 
 		return false;
-	}
+
+	};
 
 
 
-}
+};
 
 module.exports = ScriptBehaviour;

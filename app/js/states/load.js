@@ -1,5 +1,6 @@
 var state = require('../core/core.js').state;
 
+
 	var Load = function() {
 		var _this = this;
 
@@ -15,6 +16,10 @@ var state = require('../core/core.js').state;
 
 		this.preload = function() {
 			_preload();
+			Phaser = window.Phaser || {};
+			game = window.game || {};
+
+
 			_this.createLoadScreen(); //Creates the load screen to watch.  This must be first
 
 			//Loads all needed Assets
@@ -27,11 +32,11 @@ var state = require('../core/core.js').state;
 		this.create = function() {
 			_create();
 			_this.loadNextState();
-		}
+		};
 
 		this.update = function() {
 			_update();
-		}
+		};
 
 		this.createLoadScreen = function() {
 			//Add a loading... label on the screen
@@ -45,10 +50,10 @@ var state = require('../core/core.js').state;
 			var progressBar = game.add.sprite(game.world.centerX, 200, 'progressBar');
 			progressBar.anchor.setTo(0.5, 0.5);
 			game.load.setPreloadSprite(progressBar);
-		}
+		};
 
 
-		this.loadAudioAssets = function() {}
+		this.loadAudioAssets = function() {};
 
 
 
@@ -60,19 +65,22 @@ var state = require('../core/core.js').state;
 
 
 
+
 		this.loadNextState = function() {
 			game.state.start('menu');
-		}
+		};
 
 
 
-		this.loadSpritesheetAssets = function() {}
+		this.loadSpritesheetAssets = function() {};
 
 
 
-		this.loadTilesetAssets = function() {}
+		this.loadTilesetAssets = function() {};
+
 	};
 
 	Load.prototype = Object.create(state.prototype);
+
 
 	module.exports = Load;

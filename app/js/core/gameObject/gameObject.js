@@ -1,6 +1,6 @@
 var BaseObject = require('../base/baseObject.js');
 var Component = require('../component/component.js');
-
+var _ = window._ || {};
 
 
 /**
@@ -10,7 +10,8 @@ var Component = require('../component/component.js');
  *
  * @class GameObject
  */
-export class GameObject extends BaseObject {
+class GameObject extends BaseObject {
+	
 
 	/**
 	 * The Base Constructor for the GameObject class
@@ -30,7 +31,8 @@ export class GameObject extends BaseObject {
 		this.frame = frame || undefined;
 		this.tag = undefined; //The tag associated with this class.
 		this.layer = undefined;
-		this.isActive = false;
+		this.isActive = true;
+		console.log(this);
 	}
 
 	/**
@@ -38,12 +40,13 @@ export class GameObject extends BaseObject {
 	 *
 	 * @method preload
 	 */
-	preload() {
-		for (var key in this.components) {
+	preload(context) {
+		super.preload();
+		console.log(context);
+		_.forEach(this.components, function(component) {
 			//Cycles through each component and preloads it
-			var value = this.components[key];
-			value.preload();
-		}
+			component.preload();
+		});
 	}
 
 	/**
@@ -52,11 +55,11 @@ export class GameObject extends BaseObject {
 	 * @method create
 	 */
 	create() {
+		super.create();
 		if (this.isActive) {
-			for (var key in this.components) {
-				var value = this.components[key];
-				value.create();
-			}
+			_.forEach(this.components, function(component) {
+				component.create();
+			});
 		}
 
 	}
@@ -67,13 +70,14 @@ export class GameObject extends BaseObject {
 	 * @method update
 	 */
 	update() {
+		super.update();
 		if (this.isActive) {
-			for (var key in this.components) {
-				var value = this.components[key];
-				if (typeof value.isEnabled === 'undefined' || value.isEnabled() === true) {
-					value.update();
+			_.forEach(this.components, function(component) {
+				if (_.isUndefined(component.isEnabled) || component.isEnabled() === true) {
+					component.update();
 				}
-			}
+
+			});
 		}
 	}
 
@@ -83,7 +87,17 @@ export class GameObject extends BaseObject {
 	 * @method destroy
 	 */
 	destroy() {
-
+		super.destroy();
+		if (_.isFunction(this.sprite.destroy)) {
+			this.sprite.destroy();
+		}
+		_.forEach(this.components, function(value, key) {
+			console.log('hit');
+			if (_.isFunction(value.destroy)) {
+				value.destroy();
+			}
+			delete this.components[key];
+		});
 	}
 
 	/**
@@ -119,13 +133,14 @@ export class GameObject extends BaseObject {
 	 * @param {string} methodName The method name to call for this object and its components
 	 */
 	broadcastMessage(methodName) {
-		for (var key in this.components) {
+		_.forEach(this.components, function(component) {
 			//Cycles through all keys in the components object
-			if (typeof this.components[key][methodName] === 'function') {
-				//If there is a method of the passed name, it will be called
-				this.components[key][methodName]();
+			if (_.isFunction(component[methodName])) {
+				//If there is a method of the passed name. it will be called
+				component[methodName]();
 			}
-		}
+
+		});
 	}
 
 	/**
@@ -156,6 +171,6 @@ export class GameObject extends BaseObject {
 			}
 		}
 	}
-}
+};
 
 module.exports = GameObject;

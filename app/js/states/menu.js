@@ -1,4 +1,5 @@
 var state = require('../core/core.js').state;
+
 	var Menu = function() {
 		var _this = this;
 
@@ -14,21 +15,23 @@ var state = require('../core/core.js').state;
 
 		this.preload = function() {
 			_preload();
+			Phaser = window.Phaser || {};
+			game = window.game || {};
 		};
 
 		this.create = function() {
 			_create();
 			_this.createButton();
 			_this.createNameLabel();
-		}
+		};
 
 		this.update = function() {
 			_update();
-		}
+		};
 
 		this.createNameLabel = function() {
 			//Display the name of the game
-			var nameLabel = game.add.text(game.world.centerX, -50, 'Donald Dirkins!', {
+			var nameLabel = game.add.text(game.world.centerX, -50, 'Donald Dingberg!', {
 				font: '90px Geo',
 				fill: '#ffffff'
 			});
@@ -72,13 +75,13 @@ var state = require('../core/core.js').state;
 		 */
 		this.start = function() {
 			//Start the actual game
-			// game.state.start('play');
-			console.log('Start Game!!!');
+			game.state.start('play');
 		};
 
 
 	};
 
 	Menu.prototype = Object.create(state.prototype);
+
 
 	module.exports = Menu;

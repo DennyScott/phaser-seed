@@ -7,13 +7,14 @@ game.global = {};
 
 var boot = require('./states/boot.js');
 var load = require('./states/load.js');
-var menu = require('./states/menu.js')
+var menu = require('./states/menu.js');
+var play = require('./states/play.js');
 //Add all the states
 game.state.add('boot', new boot());
 game.state.add('load', new load());
 game.state.add('menu', new menu());
-// game.state.add('play', window.states.playState);
-// game.state.add('victory', window.states.victoryState);
+game.state.add('play', new play());
+
 
 console.log('hello there');
 

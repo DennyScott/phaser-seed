@@ -7,6 +7,7 @@
   "private": true,
   "dependencies": {},
   "devDependencies": {
-    "phaser": "~2.1.3"
+    "phaser": "~2.1.3",
+    "lodash": "~2.4.1"
   }
 }
