@@ -4,7 +4,7 @@
 
 	var Play = function() {
 		var _this = this;
-		this.player = undefined;
+		this.gameObjectManager = undefined;
 
 		var _constructor = function() {
 			window.Zephyr.states.__state__.call(_this);
@@ -19,16 +19,19 @@
 		this.preload = function() {
 			_preload();
 			game = window.game || {};
+			_this.gameObjectManager = Zephyr.managers.add.gameObjectManager();
 		};
 
 		this.create = function() {
 			_create();
-			_this.player = game.objects.add.player(game.world.centerX, game.world.centerY);
+			var player = game.objects.add.player(game.world.centerX, game.world.centerY);
+			_this.gameObjectManager.add('player', player);
+
 		};
 
 		this.update = function() {
 			_update();
-			_this.player.update();
+			_this.gameObjectManager.update();
 		};
 	};
 

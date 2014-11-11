@@ -44,6 +44,12 @@
 		 */
 		this.update = function() {
 			_update();
+			//Cycles through all objects created and stored in the manager, and runs their update functions.
+			_.forEach(_this.gameObjects, function(value) {
+				if(_.isFunction(value.update)) { //checks to see if it has an update function
+					value.update();
+				}
+			});
 		};
 
 		this.destory = function() {
@@ -148,5 +154,12 @@
 	GameObjectManager.prototype = Object.call(Zephyr.managers.baseManager.prototype);
 
 	Zephyr.managers = Zephyr.managers || {};
+	Zephyr.managers.add = Zephyr.managers.add || {};
 	Zephyr.managers.gameObjectManager = GameObjectManager;
+	Zephyr.managers.add.gameObjectManager = function(game) {
+		var manager = new GameObjectManager(game);
+		manager.preload();
+		manager.create();
+		return manager;
+	}
 })();
