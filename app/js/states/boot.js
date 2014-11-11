@@ -31,8 +31,6 @@ class Boot extends state {
 
 	_showStats() {
 		var stats = new Stats();
-		console.log(stats);
-
 		stats.setMode(0);
 
 		stats.domElement.style.position = 'absolute';
