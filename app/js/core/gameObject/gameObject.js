@@ -40,7 +40,7 @@ class GameObject extends BaseObject {
 	 * @method preload
 	 */
 	preload() {
-		super.preload();
+		super();
 		_.forEach(this.components, function(component) {
 			//Cycles through each component and preloads it
 			component.preload();
@@ -53,7 +53,7 @@ class GameObject extends BaseObject {
 	 * @method create
 	 */
 	create() {
-		super.create();
+		super();
 		if (this.isActive) {
 			_.forEach(this.components, function(component) {
 				component.create();
@@ -68,7 +68,7 @@ class GameObject extends BaseObject {
 	 * @method update
 	 */
 	update() {
-		super.update();
+		super();
 		if (this.isActive) {
 			_.forEach(this.components, function(component) {
 				if (_.isUndefined(component.isEnabled) || component.isEnabled() === true) {
@@ -85,7 +85,7 @@ class GameObject extends BaseObject {
 	 * @method destroy
 	 */
 	destroy() {
-		super.destroy();
+		super();
 		if (_.isFunction(this.sprite.destroy)) {
 			this.sprite.destroy();
 		}
