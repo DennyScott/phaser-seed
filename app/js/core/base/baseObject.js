@@ -1,13 +1,11 @@
-(function() {
-
 	/**
 	 * The BaseObject class is the inherited class most other scripts that involve in game activity will inherit from.  It contains the required preload, create, update
 	 * and destroy methods that are needed for other objects.
 	 *
 	 * @class  BaseObject
 	 */
-	var BaseObject = new function() {
-		this.game;
+	var BaseObject = function(game) {
+		this.game = undefined;
 
 		/**
 		 * The base constructor for this class, this will store a variable called game into an attribute called game.
@@ -57,9 +55,4 @@
 
 		_constructor(game);
 	};
-
-	Zephyr = Zephyr || {};
-	Zephyr.base = Zephyr.base || {};
-	Zephyr.base.__baseObject__ = BaseObject;
-
-})();
+	module.exports = BaseObject;

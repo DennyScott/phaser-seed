@@ -1,3 +1,5 @@
+
+[![Code Climate](https://codeclimate.com/github/DennyScott/phaser-seed/badges/gpa.svg)](https://codeclimate.com/github/DennyScott/phaser-seed)
 # Phaser Seed Project
 
 ##Cocoon Instructions

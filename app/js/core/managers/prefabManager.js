@@ -1,5 +1,3 @@
-(function() {
-	
 	/**
 	 * Used to hold all existing prefabs contained within a scene.  Items added to this manager
 	 * do not exist in the scene, but instead exist to create clones of to put in the game world
@@ -81,7 +79,4 @@
 		_constructor(game);
 	};
 
-	var Zephyr = Zephyr || {};
-	Zephyr.managers = Zephyr.managers || {};
-	Zephyr.managers.prefabManager = PrefabManager;
-})();
+	module.exports = PrefabManager;

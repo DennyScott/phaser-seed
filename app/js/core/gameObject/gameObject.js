@@ -1,4 +1,5 @@
-(function() {
+	var baseObject = require('../base/baseObject.js')
+
 	/**
 	 * Any object found within the scnee is generally going to be a GameObject.  This object stores all attributes needed for the object,
 	 * any componenet created by the developer and attached will be stroed here and have all of its function intialised and run, and will store
@@ -28,7 +29,7 @@
 		 * @param {int} frame The frame numbers for the passed spritesheet.  Leave undefined if not using a spritesheet.
 		 */
 		var _constructor = function(game, name, imageKey, frame) {
-			Zephyr.gameObject.gameObject.call(_this, game); //Initalizes the BaseObject Super class
+			baseObject.call(_this, game); //Initalizes the BaseObject Super class
 			_this.name = name || ""; //The name of the object
 			_this.imageKey = imageKey || ""; //The image for the object
 			_this.frame = frame || undefined;
@@ -156,10 +157,6 @@
 	};
 
 
-	GameObject.prototype = Object.create(Zephyr.core.__baseObject__.prototype);
+	GameObject.prototype = Object.create(baseObject.prototype);
 
-	Zephyr = Zephyr || {};
-	Zephyr.gameObject = Zephyr.gameObject || {};
-	Zephyr.gameObject.gameObject = GameObject;
-
-})();
+	module.exports = GameObject;

@@ -1,5 +1,4 @@
-(function() {
-
+var baseObject = require('../base/baseObject.js');
 	/**
 	 * The Component class is used for items that will be attached to a Game Object.  These include things like scripts.
 	 *
@@ -15,7 +14,7 @@
 		 * @param {Phaser.Game} game The game object in which this component will exist
 		 */
 		var _constructor = function(game) {
-			Zephyr.base.__baseObject__.call(_this, game);
+			baseObject.call(_this, game);
 		};
 
 		_constructor(game);
@@ -47,9 +46,6 @@
 	};
 
 	//Inherit Base Object
-	Component.prototype = Object.create(Zephyr.base.__baseObject__.prototype);
+	Component.prototype = Object.create(baseObject.prototype);
 
-	Zephyr = Zephyr || {};
-	Zephyr.component = Zephyr.component || {};
-	Zephyr.component.__component__ = Component;
-})();
+	module.exports = Component;

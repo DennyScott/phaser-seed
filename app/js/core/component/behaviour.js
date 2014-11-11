@@ -1,5 +1,4 @@
-(function() {
-
+var component = require('./component.js');
 	/**
 	 * The Behaviour class are Components that can be enabled or disabled.
 	 *
@@ -12,7 +11,7 @@
 
 
 		var _constructor = function(game) {
-			Zephyr.component.__component__.call(_this, game);
+			component.call(_this, game);
 
 		};
 
@@ -22,7 +21,7 @@
 		 * @return boolean Is the object enabled
 		 */
 		this.isEnabled = function() {
-			return _this._enabled;
+			return _enabled;
 		};
 
 		/**
@@ -31,17 +30,13 @@
 		 * @param en The value to set the enabled or disabled object o.
 		 */
 		this.setEnabled = function(en) {
-			_this._enabled = en;
-		}
+			_enabled = en;
+		};
 
 		_constructor(game);
 	};
 
-	Behaviour.prototype = Zephyr.component.__component__.prototype;
+	Behaviour.prototype = component.prototype;
 
-	Zephyr = Zephyr || {};
-	Zephyr.component = Zephyr.component || {};
-	Zephyr.component.behaviour = Behaviour;
+	module.exports = Behaviour;
 
-
-})();
