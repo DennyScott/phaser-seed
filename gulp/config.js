@@ -23,11 +23,21 @@ module.exports = {
     dest: dest
   },
   lib: {
-    src: [src + '/lib/lodash/dist/lodash.min.js', 
-          src + '/lib/phaser/build/phaser.js', 
-          src + '/lib/lokijs/src/lokijs.js',
-          src + '/lib/stats.js/build/stats.min.js'],
+    src: [
+      src + '/lib/lodash/dist/lodash.min.js', 
+      src + '/lib/phaser/build/phaser.js', 
+      src + '/lib/lokijs/src/lokijs.js',
+      src + '/lib/stats.js/build/stats.min.js'
+    ],
     dest: dest + '/lib'
+  },
+  test: {
+    files: [
+      dest + 'lib/libs.js',
+      dest + 'app.js',
+      'test/unit/**/*.js'
+    ],
+    karma: 'karma.conf.js'
   },
   browserify: {
     // Enable source maps

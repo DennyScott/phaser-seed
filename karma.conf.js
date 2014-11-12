@@ -3,12 +3,6 @@ module.exports = function(config){
 
     basePath : './',
 
-    files : [
-      'app/lib/phaser/build/phaser.js',
-      'app/js/**/*.js',
-      'test/unit/**/*.js'
-    ],
-
     autoWatch : true,
 
     frameworks: ['jasmine'],

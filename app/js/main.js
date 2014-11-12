@@ -3,7 +3,9 @@ var Phaser = require('phaser');
 window.game = new Phaser.Game(1000, 680, Phaser.AUTO, 'gameDiv');
 
 //Define our 'global variable'
-game.global = {};
+game.global = {
+	"debug" : true
+};
 
 var boot = require('./states/boot.js');
 var load = require('./states/load.js');
