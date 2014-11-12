@@ -18,8 +18,8 @@
 
 		create() {
 			super.create();
-			var _player = player(game.world.centerX, game.world.centerY);
-			this.gameObjectManager.add('player', _player);
+			this.gameObjectManager.add('player', player(game.world.centerX, game.world.centerY)); //Adds player to the gameObjectManger
+			this.gameObjectManager.add('actionItem'); //Adds player to the gameObjectManger
 			
 			// var db = new loki('loki.json');
 			// var children = db.addCollection('children');

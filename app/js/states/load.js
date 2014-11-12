@@ -1,6 +1,4 @@
 var state = require('../core/core.js').state;
-
-
 	class Load extends state {
 
 		constructor() {
@@ -52,6 +50,7 @@ var state = require('../core/core.js').state;
 		loadImageAssets() {
 			//Load a new asset that we will use in the menu state
 			game.load.image('player', 'assets/images/RedSquare.png');
+			game.load.image('actionItem', 'assets/images/GreenCircle.png');
 			game.load.image('nextButton', 'assets/images/BlackLabel.png');
 		};
 

@@ -22,12 +22,10 @@ class GameObject extends BaseObject {
 	 * @param {string} imageKey The key for the image to be used for the sprite
 	 * @param {int} frame The frame numbers for the passed spritesheet.  Leave undefined if not using a spritesheet.
 	 */
-	constructor(game, name, imageKey, frame) {
+	constructor(game, imageKey, frame) {
 		super(game); //Initalizes the BaseObject super class.
 		this.components = {}; //The components that belong to this object.
 		this.sprite = undefined; //The part that will actually visually appear
-		this.name = name; //the name of this object
-		this.imageKey = imageKey; //The image for this object
 		this.frame = frame || undefined;
 		this.tag = undefined; //The tag associated with this class.
 		this.layer = undefined;
@@ -52,8 +50,9 @@ class GameObject extends BaseObject {
 	 *
 	 * @method create
 	 */
-	create() {
+	create(x, y) {
 		super();
+		this.sprite = game.add.sprite(x, y, imageKey);
 		if (this.isActive) {
 			_.forEach(this.components, function(component) {
 				component.create();
