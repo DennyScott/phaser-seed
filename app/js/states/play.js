@@ -20,7 +20,6 @@
 			super.create();
 			var _player = player(game.world.centerX, game.world.centerY);
 			this.gameObjectManager.add('player', _player);
-			console.log(this.gameObjectManager);
 			
 			// var db = new loki('loki.json');
 			// var children = db.addCollection('children');
