@@ -171,3 +171,7 @@ class GameObject extends BaseObject {
 };
 
 module.exports = GameObject;
+if(game.global.debug){
+	game.global.core = game.global.core || {};
+	game.global.core.gameObject = GameObject;
+}
